@@ -5,13 +5,17 @@ public class Acquisto {
 	private int idLibro;
 	private String titolo;
 	private int quantita;
-	private double prezzoTotale;
-	private Acquisto(int idLibro, String titolo, int quantita, double prezzoTotale) {
+	private double prezzo;
+	private Utente username;
+	private int idScontrino;
+	public Acquisto(int idLibro, String titolo, int quantita, double prezzo, Utente username, int idScontrino) {
 		super();
 		this.idLibro = idLibro;
 		this.titolo = titolo;
 		this.quantita = quantita;
-		this.prezzoTotale = prezzoTotale;
+		this.prezzo = prezzo;
+		this.username = username;
+		this.idScontrino = idScontrino;
 	}
 	public int getIdLibro() {
 		return idLibro;
@@ -31,16 +35,28 @@ public class Acquisto {
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
 	}
-	public double getPrezzoTotale() {
-		return prezzoTotale;
+	public double getPrezzo() {
+		return prezzo;
 	}
-	public void setPrezzoTotale(double prezzoTotale) {
-		this.prezzoTotale = prezzoTotale;
+	public void setPrezzo(double prezzo) {
+		this.prezzo = prezzo;
+	}
+	public Utente getUsername() {
+		return username;
+	}
+	public void setUsername(Utente username) {
+		this.username = username;
+	}
+	public int getIdScontrino() {
+		return idScontrino;
+	}
+	public void setIdScontrino(int idScontrino) {
+		this.idScontrino = idScontrino;
 	}
 	@Override
 	public String toString() {
-		return "Acquisto [idLibro=" + idLibro + ", titolo=" + titolo + ", quantita=" + quantita + ", prezzoTotale="
-				+ prezzoTotale + "]";
+		return "Acquisto [idLibro=" + idLibro + ", titolo=" + titolo + ", quantita=" + quantita + ", prezzo=" + prezzo
+				+ ", username=" + username + ", idScontrino=" + idScontrino + "]";
 	}
 	
 }
