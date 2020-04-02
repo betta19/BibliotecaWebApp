@@ -48,4 +48,16 @@ public boolean checkAccessoUtente(String username, String password) throws SQLEx
 
 	return false;
 }
+
+public boolean checkRegistraUtente(String username) throws SQLException {
+	PreparedStatement s = connessione.prepareStatement("select * from utente where username = ?;");
+	s.setString(1, username);
+	ResultSet risultato = s.executeQuery();
+	while (risultato.next()) {
+
+		return true;
+	}
+
+	return false;
+}
 }
