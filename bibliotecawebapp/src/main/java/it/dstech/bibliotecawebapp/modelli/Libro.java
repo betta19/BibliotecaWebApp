@@ -1,12 +1,14 @@
 package it.dstech.bibliotecawebapp.modelli;
 
 public class Libro {
+	
 private int idLibro;
 private String titolo;
 private String autore;
 private double prezzo;
 private int disponibilita;
 private int quantita;
+
 public Libro(int idLibro, String titolo, String autore, double prezzo, int disponibilita, int quantita) {
 	super();
 	this.idLibro = idLibro;
