@@ -6,7 +6,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+
+import it.dstech.bibliotecawebapp.modelli.Libro;
 
 public class Database {
 	
@@ -59,5 +63,28 @@ public boolean checkRegistraUtente(String username) throws SQLException {
 	}
 
 	return false;
+}
+public void inserimentoLibro(String titolo, String autore, double prezzo, int disponibilita, int quantita) throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("insert into libro (titolo, autore, prezzo, disponibilita, quantita) values (?,?, ?, ?, ?);");
+	state.setString(1, titolo);
+	state.setString(2, autore);
+	state.setDouble(3, prezzo);
+	state.setInt(4, disponibilita);
+	state.setInt(5, quantita);
+	state.execute();
+} 
+public List<Libro> stampaListaLibri () throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("select * from libro;");
+	ResultSet risultato = state.executeQuery();
+	List<Libro> listaLibri = new ArrayList<>();
+	while (risultato.next()) {
+		String titolo = risultato.getString("titolo");
+		String autore = risultato.getString("autore");
+		double prezzo = risultato.getDouble("prezzo");
+		int disponibilita = risultato.getInt("disponibilita");
+		int quantita = risultato.getInt("quantita");
+		Libro libro = new Libro(titolo, autore, prezzo, disponibilita, quantita);
+		listaLibri.add(libro);
+	} return listaLibri;
 }
 }

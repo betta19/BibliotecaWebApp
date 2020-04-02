@@ -9,6 +9,14 @@ private double prezzo;
 private int disponibilita;
 private int quantita;
 
+public Libro(String titolo, String autore, double prezzo, int disponibilita, int quantita) {
+	super();
+	this.titolo = titolo;
+	this.autore = autore;
+	this.prezzo = prezzo;
+	this.disponibilita = disponibilita;
+	this.quantita = quantita;
+}
 public Libro(int idLibro, String titolo, String autore, double prezzo, int disponibilita, int quantita) {
 	super();
 	this.idLibro = idLibro;
