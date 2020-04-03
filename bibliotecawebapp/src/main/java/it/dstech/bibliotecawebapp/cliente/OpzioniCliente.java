@@ -41,7 +41,7 @@ Database db;
 		db.close();
 		req.getRequestDispatcher("stampaAcquisti.jsp").forward(req, resp);
 	}
-	else if (azione.equalsIgnoreCase("Stampa libri in prestito")) {
+	else if (azione.equalsIgnoreCase("Stampa prestiti")) {
 		req.setAttribute("username", username);
 		db.close();
 		req.getRequestDispatcher("stampaAffitti.jsp").forward(req, resp);

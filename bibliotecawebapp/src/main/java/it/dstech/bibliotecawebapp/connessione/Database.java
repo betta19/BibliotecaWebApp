@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import it.dstech.bibliotecawebapp.modelli.Libro;
+import it.dstech.bibliotecawebapp.modelli.Utente;
 
 public class Database {
 	
@@ -39,7 +40,7 @@ public void inserimentoUtente(String username, String password) throws SQLExcept
 	state.setString(2, password);
 	state.execute();
 }
-
+/*
 public boolean checkAccessoUtente(String username, String password) throws SQLException {
 	PreparedStatement s = connessione.prepareStatement("select * from utente where username = ? and password = ? ;");
 	s.setString(1, username);
@@ -51,7 +52,7 @@ public boolean checkAccessoUtente(String username, String password) throws SQLEx
 	}
 
 	return false;
-}
+}*/
 
 public boolean checkRegistraUtente(String username) throws SQLException {
 	PreparedStatement s = connessione.prepareStatement("select * from utente where username = ?;");
@@ -64,6 +65,37 @@ public boolean checkRegistraUtente(String username) throws SQLException {
 
 	return false;
 }
+
+public Utente getUtente(String username, String password) throws SQLException {
+	PreparedStatement statement = connessione
+			.prepareStatement("select * from utente where username = ? and password = ?");
+	statement.setString(1, username);
+	statement.setString(2, password);
+	ResultSet executeQuery = statement.executeQuery();
+	while (executeQuery.next()) {
+//		String u = executeQuery.getString(1);
+		String u = executeQuery.getString("username");
+		String p = executeQuery.getString("password");
+		boolean ac = executeQuery.getBoolean("active");
+		
+		return new Utente(u, p, ac);
+
+	}
+	return null;
+}
+
+public void validaUtente(String username) throws SQLException {
+	PreparedStatement prepareStatement = this.connessione.prepareStatement("UPDATE utente SET active = ? WHERE (username = ?);");
+	prepareStatement.setBoolean(1, true);
+	prepareStatement.setString(2, username);
+	prepareStatement.execute();
+	
+
+	
+	
+}
+
+
 public void inserimentoLibro(String titolo, String autore, double prezzo, int disponibilita, int quantita) throws SQLException {
 	PreparedStatement state = connessione.prepareStatement("insert into libro (titolo, autore, prezzo, disponibilita, quantita) values (?,?, ?, ?, ?);");
 	state.setString(1, titolo);

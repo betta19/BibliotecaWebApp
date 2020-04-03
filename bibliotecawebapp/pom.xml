@@ -10,6 +10,7 @@
 
 	<properties>
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+		<java.mail.version>1.6.2</java.mail.version>
 	</properties>
 
 	<dependencies>
@@ -18,6 +19,20 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${javax.servlet-api.version}</version>
 		</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>${java.mail.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>${java.mail.version}</version>
+		</dependency>
+		
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
