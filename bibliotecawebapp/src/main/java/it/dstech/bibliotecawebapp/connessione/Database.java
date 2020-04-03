@@ -6,8 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 
 import it.dstech.bibliotecawebapp.modelli.Libro;
@@ -90,9 +92,6 @@ public void validaUtente(String username) throws SQLException {
 	prepareStatement.setString(2, username);
 	prepareStatement.execute();
 	
-
-	
-	
 }
 
 
@@ -110,13 +109,87 @@ public List<Libro> stampaListaLibri () throws SQLException {
 	ResultSet risultato = state.executeQuery();
 	List<Libro> listaLibri = new ArrayList<>();
 	while (risultato.next()) {
+		int idLibro = risultato.getInt("idLibro");
 		String titolo = risultato.getString("titolo");
 		String autore = risultato.getString("autore");
 		double prezzo = risultato.getDouble("prezzo");
 		int disponibilita = risultato.getInt("disponibilita");
 		int quantita = risultato.getInt("quantita");
-		Libro libro = new Libro(titolo, autore, prezzo, disponibilita, quantita);
+		Libro libro = new Libro(idLibro, titolo, autore, prezzo, disponibilita, quantita);
 		listaLibri.add(libro);
 	} return listaLibri;
+	
+}
+public int creaScontrino(String username) throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("insert into scontrino (idScontrino, username, data) values (?,?, ?);");
+	java.util.Date data = new java.util.Date();
+	   DateFormat formato = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+       int idScontrino = (int) (Math.random() * 1000 + Math.random() * 1000);
+       state.setInt(1, idScontrino);
+       state.setString(2, username);
+       state.setString(3, formato.format(data));
+       state.execute();
+       return idScontrino;
+} 
+public boolean controlloQuantitaLibri (String titolo, int quantita, List<Libro> lista) throws SQLException {
+	
+	for (Libro libro : lista) {
+		
+	if (titolo.equalsIgnoreCase(libro.getTitolo()) && quantita > libro.getDisponibilita()) {
+		return false;
+	}
+	} return true;
+	
+}
+public void inserimentoTabellaAcquisto (String titolo, int quantita, String username, int idScontrino) throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("insert into acquisto (titolo, quantita, username, idscontrino) values (?, ?, ?, ?);");
+	state.setString(1, titolo);
+	state.setInt(2, quantita);
+	state.setString(3, username);
+	state.setInt(4, idScontrino);
+	state.execute();
+} 
+public void updateQuantitaLibri (String titolo, int quantita) throws SQLException {
+	List<Libro> lista = stampaListaLibri();
+	for (int i = 0; i < lista.size(); i++) {
+		if (lista.get(i).getTitolo().equalsIgnoreCase(titolo)) {
+			int nuovaQuantita = lista.get(i).getQuantita() - quantita;
+					int nuovaDisponibilita = lista.get(i).getDisponibilita() - quantita;
+					lista.get(i).setQuantita(nuovaQuantita);
+					lista.get(i).setDisponibilita(nuovaDisponibilita);
+					updateTabellaLibro(titolo, nuovaQuantita, nuovaDisponibilita);
+					
+		}
+	}
+} public void updateTabellaLibro (String titolo, int quantita, int disponibilita) throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("update libro set quantita= ? and disponibilita=? where titolo = ?;");
+	state.setInt(1, quantita);
+	state.setInt(2, disponibilita);
+	state.setString(3, titolo);
+	state.execute();
+}
+public  double getPrezzo( int idScontrino) throws SQLException {
+    double costo = 0;
+    String query = "select acquisto.quantita,libro.prezzo from acquisto inner join libro on acquisto.titolo=libro.titolo where acquisto.idScontrino=?;";
+    PreparedStatement statement = connessione.prepareStatement(query);
+    statement.setInt(1, idScontrino);
+
+    ResultSet risultato = statement.executeQuery();
+    while (risultato.next()) {
+
+        costo = costo + (risultato.getInt(1) * risultato.getDouble(2));
+
+    }
+    return costo;
+
+}
+public boolean totaleScontrino(int idScontrino, double spesa) throws SQLException {
+	String query = "update scontrino set spesa=? where idScontrino=?;";
+    PreparedStatement statement = connessione.prepareStatement(query);
+    statement.setDouble(1, spesa);
+    statement.setInt(2, idScontrino);
+    statement.execute();
+    return true;
+	
 }
 }

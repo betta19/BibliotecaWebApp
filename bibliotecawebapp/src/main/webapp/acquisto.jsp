@@ -30,18 +30,19 @@
 <form action="acquisto" method = "post">
   <div class="input-group input-group-sm mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="inputGroup-sizing-sm"><label for="titolo">Titoli libri</label></span>
+    <span class="input-group-text" id="inputGroup-sizing-sm"><label for="titolo">Titolo</label></span>
      
-  <select name = "titolo">
+      <select name = "titolo">
   
   <% for (Libro l : lista){%>
-    <option value="<%=l.getTitolo() %>"><%=l.getTitolo() %></option>
-    
+    <option value="<%=l.getTitolo() %>"> <%=l.getTitolo() %></option>
+  
     <% } %>
+    
   </select>
-  <br>
-  </div>
- <br><br></div>
+   <br><br></div>
+   </div>
+  
    <div class="input-group input-group-sm mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-sm">Inserisci quantità da acquistare</span>
@@ -50,6 +51,7 @@
   <input type="submit" class="btn btn-outline-success" style="height:45px;" name= "azione" value="Aggiungi al carrello">
   <input type="submit" class="btn btn-outline-danger" style="width:120px; height:45px;" name= "azione" value="Paga">
   <input type="hidden" id="username" name="username" value=<%=nome%>>
+  <input type="hidden" id="idScontrino" name="idScontrino" value=<%=(int)request.getAttribute("idScontrino")%>>
 
    
    <br><br>

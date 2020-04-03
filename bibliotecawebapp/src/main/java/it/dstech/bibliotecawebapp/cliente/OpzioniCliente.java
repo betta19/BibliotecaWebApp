@@ -26,7 +26,9 @@ Database db;
 		String azione = req.getParameter("action");
 		db = new Database();
 	if (azione.equalsIgnoreCase("Compra libri")) {
+		int idScontrino = db.creaScontrino(username);
 		req.setAttribute("listaLibri", db.stampaListaLibri());
+		req.setAttribute("idScontrino", idScontrino);
 		req.setAttribute("username", username);
 	db.close();
 	req.getRequestDispatcher("acquisto.jsp").forward(req, resp);
