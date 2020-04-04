@@ -6,6 +6,11 @@
 <html>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <head>
+<style>
+table, th, td {
+  border: 1px solid #000000;
+}
+</style>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -24,6 +29,34 @@
 	<% }
 
 %><br>
+<table>
+  
+    <h2>Lista Libri</h2>
+  <tr>
+   <th>Nome </th>
+   <th>Autore </th>
+   <th>Quantità Acquistabile</th>
+   <th>Prezzo </th>
+   
+  </tr>
+  <% for(Libro l : lista) { %>
+  
+  <tr>
+    <td>
+    <%=l.getTitolo()%>
+    </td>
+    <td>
+    <%=l.getAutore()%>
+    </td>
+    <td>
+    <%=l.getDisponibilita()%>
+    </td>     
+    <td>
+    <%=l.getPrezzo()%>
+    </td>  
+  </tr>
+	<% } %> 
+</table> <br><br>
 
 
 <h2>Cosa vuoi comprare, <%=request.getAttribute("username")%> ?</h2>
@@ -56,6 +89,11 @@
    
    <br><br>
    </form>
+   <form action="tornaIndietro" method="post">
+  <input type="submit" class="btn btn-outline-secondary" value="Torna Indietro">
+  <input type="hidden" id="username" name="username" value=<%=nome%>>  
+   <input type="hidden" id="idScontrino" name="idScontrino" value=<%=(int)request.getAttribute("idScontrino")%>>
+</form>
 
 </body>
 </html>

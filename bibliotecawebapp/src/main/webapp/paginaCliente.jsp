@@ -10,9 +10,9 @@
 
 </head>
 <body>
-<%String nome = (String) request.getAttribute("username"); %>
 
 <br>
+<%String nome = (String) request.getAttribute("username"); %>
 <h2><p class="text-xl-center">Fai una scelta, <%=request.getAttribute("username")%></p></h2><br><br>
 <% String mess = (String) request.getAttribute("mess"); 
 	if (mess != null ){

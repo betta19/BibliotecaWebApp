@@ -40,6 +40,7 @@ Database db;
 	}
 	else if (azione.equalsIgnoreCase("Stampa acquisti")) {
 		req.setAttribute("username", username);
+		req.setAttribute("listaScontrini", db.stampaScontrini(username));
 		db.close();
 		req.getRequestDispatcher("stampaAcquisti.jsp").forward(req, resp);
 	}
@@ -47,6 +48,15 @@ Database db;
 		req.setAttribute("username", username);
 		db.close();
 		req.getRequestDispatcher("stampaAffitti.jsp").forward(req, resp);
+	}
+	else if (azione.equalsIgnoreCase("Dettagli")) {
+		req.setAttribute("username", username);
+		int idScontrino = Integer.parseInt(req.getParameter("id"));
+		req.setAttribute("id", idScontrino);
+		req.setAttribute("listaScontrini", db.stampaScontrini(username));
+		req.setAttribute("listaProdottiDelloScontrino", db.stampaProdottiScontrino(idScontrino));
+		db.close();
+		req.getRequestDispatcher("listaProdottiDelloScontrino.jsp").forward(req, resp);
 	}
 		
 		

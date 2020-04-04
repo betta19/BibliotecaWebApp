@@ -13,7 +13,11 @@ import java.util.Locale;
 import java.util.Properties;
 
 import it.dstech.bibliotecawebapp.modelli.Libro;
+import it.dstech.bibliotecawebapp.modelli.LibroVenduto;
+import it.dstech.bibliotecawebapp.modelli.Scontrino;
 import it.dstech.bibliotecawebapp.modelli.Utente;
+
+
 
 public class Database {
 	
@@ -183,8 +187,10 @@ public  double getPrezzo( int idScontrino) throws SQLException {
     return costo;
 
 }
+
+
 public boolean totaleScontrino(int idScontrino, double spesa) throws SQLException {
-	String query = "update scontrino set spesa=? where idScontrino=?;";
+	String query = "update scontrino set prezzoTotale=? where idScontrino=?;";
     PreparedStatement statement = connessione.prepareStatement(query);
     statement.setDouble(1, spesa);
     statement.setInt(2, idScontrino);
@@ -192,4 +198,45 @@ public boolean totaleScontrino(int idScontrino, double spesa) throws SQLExceptio
     return true;
 	
 }
+	public  List<Scontrino> stampaScontrini(String username) throws SQLException {
+		PreparedStatement statement = connessione.prepareStatement("select * from scontrino where username = ?;");
+		statement.setString(1, username);
+
+		ResultSet risultatoQuery = statement.executeQuery();
+		List<Scontrino> elenco = new ArrayList<>();
+		while (risultatoQuery.next()) {
+			int idScontrino = risultatoQuery.getInt("idScontrino");
+			String data = risultatoQuery.getString("data");
+			double spesa = risultatoQuery.getDouble("prezzoTotale");
+
+			Scontrino scontrino = new Scontrino(idScontrino, username, data, spesa);
+			elenco.add(scontrino);
+
+		}
+
+		return elenco;
+
+	}
+	public  List<LibroVenduto> stampaProdottiScontrino(int idScontrino)
+			throws SQLException {
+		PreparedStatement statement = connessione
+				.prepareStatement("select username, titolo, quantita from acquisto where idScontrino = ?;");
+		statement.setInt(1, idScontrino);
+
+		ResultSet risultatoQuery = statement.executeQuery();
+		List<LibroVenduto> elenco = new ArrayList<>();
+		while (risultatoQuery.next()) {
+			String username = risultatoQuery.getString("username");
+			String titolo = risultatoQuery.getString("titolo");
+			int quantita = risultatoQuery.getInt("quantita");
+			
+
+			LibroVenduto p = new LibroVenduto(idScontrino, username, titolo, quantita);
+			elenco.add(p);
+
+		}
+
+		return elenco;
+
+	}
 }
