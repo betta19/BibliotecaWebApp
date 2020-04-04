@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
 <head>
 <style>
 table, th, td {
@@ -36,7 +35,7 @@ table, th, td {
   <tr>
    <th>Nome </th>
    <th>Autore </th>
-   <th>Quantità Acquistabile</th>
+   <th>Quantità Disponibile</th>
    <th>Prezzo </th>
    
   </tr>
@@ -60,8 +59,8 @@ table, th, td {
 </table> <br><br>
 
 
-<h2>Cosa vuoi comprare, <%=request.getAttribute("username")%> ?</h2>
-<form action="acquisto" method = "post">
+<h2>Quale libro vuoi prendere in prestito, <%=request.getAttribute("username")%> ?</h2>
+<form action="affitto" method = "post">
   <div class="input-group input-group-sm mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-sm"><label for="titolo">Titolo</label></span>
@@ -79,13 +78,13 @@ table, th, td {
   
    <div class="input-group input-group-sm mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="inputGroup-sizing-sm">Inserisci quantità da acquistare</span>
+    <span class="input-group-text" id="inputGroup-sizing-sm">Inserisci quantità da prendere in prestito</span>
   </div>
   <input type="number" id="quantita" name="quantita"><br><br></div><br>
   <input type="submit" class="btn btn-outline-success" style="height:45px;" name= "azione" value="Aggiungi al carrello">
-  <input type="submit" class="btn btn-outline-danger" style="width:120px; height:45px;" name= "azione" value="Paga">
+  <input type="submit" class="btn btn-outline-danger" style="width:120px; height:45px;" name= "azione" value="Affitta">
   <input type="hidden" id="username" name="username" value=<%=nome%>>
-  <input type="hidden" id="idScontrino" name="idScontrino" value=<%=(int)request.getAttribute("idScontrino")%>>
+  <input type="hidden" id="idTessera" name="idTessera" value=<%=(int)request.getAttribute("idTessera")%>>
 
    
    <br><br>
@@ -93,8 +92,7 @@ table, th, td {
    <form action="tornaIndietro" method="post">
   <input type="submit" class="btn btn-outline-secondary" value="Torna Indietro">
   <input type="hidden" id="username" name="username" value=<%=nome%>>  
-   <input type="hidden" id="idScontrino" name="idScontrino" value=<%=(int)request.getAttribute("idScontrino")%>>
+   <input type="hidden" id="idTessera" name="idTessera" value=<%=(int)request.getAttribute("idTessera")%>>
 </form>
-
 </body>
 </html>

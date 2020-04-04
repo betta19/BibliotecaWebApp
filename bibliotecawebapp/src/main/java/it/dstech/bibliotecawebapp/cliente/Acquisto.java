@@ -19,13 +19,13 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 	String username = req.getParameter("username");
 	int idScontrino = Integer.parseInt(req.getParameter("idScontrino"));
 	String azione = req.getParameter("azione");
+	String titolo = req.getParameter("titolo");
+	int quantita = Integer.parseInt(req.getParameter("quantita"));
+	
 	Database db;
 	
 	if (azione.equalsIgnoreCase("Aggiungi al carrello")) {
 
-		String titolo = req.getParameter("titolo");
-		int quantita = Integer.parseInt(req.getParameter("quantita"));
-		
 		try {
 	
 			db = new Database();
@@ -54,6 +54,25 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 	} else if (azione.equalsIgnoreCase("Paga")) {
 		try {
 			db = new Database();
+			if (req.getParameter("titolo")!=null && !req.getParameter("titolo").equals("")) {
+                if (db.controlloQuantitaLibri(titolo, quantita, db.stampaListaLibri())) {
+                	db.inserimentoTabellaAcquisto(titolo, quantita, username, idScontrino);
+    				db.updateQuantitaLibri(titolo, quantita);
+
+    				req.setAttribute("idScontrino", idScontrino);
+    			req.setAttribute("username", username);
+    			req.setAttribute("listaLibri", db.stampaListaLibri());
+    			req.setAttribute("mess", "Libro aggiunto con successo");
+    			double spesa = db.getPrezzo(idScontrino);
+    			db.totaleScontrino (idScontrino, spesa);
+    			
+                } else {
+    				req.setAttribute("idScontrino", idScontrino);
+    				req.setAttribute("username", username);
+    				req.setAttribute("listaLibri", db.stampaListaLibri());
+    				req.setAttribute("mess", "Quantità libri non disponibile");
+    			}
+            }
 			double spesa = db.getPrezzo(idScontrino);
 			db.totaleScontrino (idScontrino, spesa);
 			db.close();

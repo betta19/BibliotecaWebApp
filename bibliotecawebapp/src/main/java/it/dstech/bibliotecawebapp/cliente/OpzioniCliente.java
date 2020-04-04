@@ -35,6 +35,9 @@ Database db;
 	} 
 	else if (azione.equalsIgnoreCase("Affitta libri")) {
 		req.setAttribute("username", username);
+		int idTessera = db.creaTessera(username);
+		req.setAttribute("idTessera", idTessera);
+		req.setAttribute("listaLibri", db.stampaListaLibri());
 		db.close();
 		req.getRequestDispatcher("affitto.jsp").forward(req, resp);
 	}
@@ -46,6 +49,7 @@ Database db;
 	}
 	else if (azione.equalsIgnoreCase("Stampa prestiti")) {
 		req.setAttribute("username", username);
+		req.setAttribute("listaPrestiti", db.stampaPrestiti(username));
 		db.close();
 		req.getRequestDispatcher("stampaAffitti.jsp").forward(req, resp);
 	}
@@ -57,6 +61,15 @@ Database db;
 		req.setAttribute("listaProdottiDelloScontrino", db.stampaProdottiScontrino(idScontrino));
 		db.close();
 		req.getRequestDispatcher("listaProdottiDelloScontrino.jsp").forward(req, resp);
+	} 
+	else if (azione.equalsIgnoreCase("Info")) {
+		req.setAttribute("username", username);
+		int idTessera = Integer.parseInt(req.getParameter("id"));
+		req.setAttribute("id", idTessera);
+		req.setAttribute("listaPrestiti", db.stampaPrestiti(username));
+		req.setAttribute("listaLibriTessera", db.stampaLibriInPrestito(idTessera));
+		db.close();
+		req.getRequestDispatcher("listaLibriTessera.jsp").forward(req, resp);
 	}
 		
 		
