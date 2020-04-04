@@ -11,15 +11,15 @@
 </head>
 <body>
 
-<div class = "sfondo">
-            
+<div class = "sfondo">   </div>  
+      
 <form action="home"> 
 
  <input type="submit" class="btn btn-outline-warning" style="width:100vw; height:100vh; opacity:60%;" value="Entra">
    
   </form>
-    </div>   
    
+  
    
         
 
