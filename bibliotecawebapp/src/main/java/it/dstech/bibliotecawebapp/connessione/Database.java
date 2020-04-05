@@ -178,7 +178,7 @@ public void updateLibri(String titolo, int quantita, int qtV, int dsV) throws SQ
 	statement3.execute();
 }
 public void updateTabellaLibro (String titolo, int quantita, int disponibilita) throws SQLException {
-	PreparedStatement state = connessione.prepareStatement("update libro set quantita= ? and disponibilita=? where titolo = ?;");
+	PreparedStatement state = connessione.prepareStatement("update libro set quantita= ?, disponibilita=? where titolo = ?;");
 	state.setInt(1, quantita);
 	state.setInt(2, disponibilita);
 	state.setString(3, titolo);

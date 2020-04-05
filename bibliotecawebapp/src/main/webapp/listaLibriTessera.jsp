@@ -22,6 +22,7 @@
    <th>Username </th>
    <th>Titolo</th>
    <th>Quantità </th>
+   <th>Data </th>
     
   </tr>
   <% for(LibroInPrestito l : lista) { %>
@@ -38,6 +39,9 @@
     </td>    
      <td>
     <%=l.getQuantita()%>
+       </td> 
+         <td>
+    <%=l.getDataAffitto()%>
        </td> 
     
   </tr>
