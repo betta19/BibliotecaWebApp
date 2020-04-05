@@ -70,11 +70,11 @@ public Utente getUtente(String username, String password) throws SQLException {
 	statement.setString(2, password);
 	ResultSet executeQuery = statement.executeQuery();
 	while (executeQuery.next()) {
-//		String u = executeQuery.getString(1);
+
 		String u = executeQuery.getString("username");
 		String p = executeQuery.getString("password");
 		boolean ac = executeQuery.getBoolean("active");
-		
+
 		return new Utente(u, p, ac);
 
 	}

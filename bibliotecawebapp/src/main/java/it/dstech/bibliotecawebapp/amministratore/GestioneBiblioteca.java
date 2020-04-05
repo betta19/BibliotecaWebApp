@@ -18,7 +18,7 @@ public class GestioneBiblioteca extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		req.setAttribute("messaggio", "hai tentato di accedere manualmente alla gestione biblioteca");
-		req.getRequestDispatcher("opzioniBiblioteca.jsp").forward(req, resp);
+		req.getRequestDispatcher("paginaAmministratore.jsp").forward(req, resp);
 
 	}
 
