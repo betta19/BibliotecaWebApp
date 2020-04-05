@@ -6,9 +6,9 @@ public class Acquisto {
 	private String titolo;
 	private int quantita;
 	private double prezzo;
-	private Utente username;
+	private String username;
 	private int idScontrino;
-	public Acquisto(int idLibro, String titolo, int quantita, double prezzo, Utente username, int idScontrino) {
+	public Acquisto(int idLibro, String titolo, int quantita, double prezzo, String username, int idScontrino) {
 		super();
 		this.idLibro = idLibro;
 		this.titolo = titolo;
@@ -41,10 +41,10 @@ public class Acquisto {
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
-	public Utente getUsername() {
+	public String getUsername() {
 		return username;
 	}
-	public void setUsername(Utente username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	public int getIdScontrino() {

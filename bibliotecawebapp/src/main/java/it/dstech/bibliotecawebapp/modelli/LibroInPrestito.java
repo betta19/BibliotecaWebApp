@@ -6,18 +6,28 @@ public class LibroInPrestito {
 	private String username;
 	private int idTessera;
 	private int quantita;
-	public LibroInPrestito(String titolo, String username, int idTessera, int quantita) {
+	private String dataAffitto;
+	
+	
+	public LibroInPrestito(String titolo, String username, int idTessera, int quantita, String dataAffitto) {
 		super();
 		this.titolo = titolo;
 		this.username = username;
 		this.idTessera = idTessera;
 		this.quantita = quantita;
+		this.dataAffitto = dataAffitto;
 	}
 	public String getTitolo() {
 		return titolo;
 	}
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
+	}
+	public String getDataAffitto() {
+		return dataAffitto;
+	}
+	public void setDataAffitto(String dataAffitto) {
+		this.dataAffitto = dataAffitto;
 	}
 	public String getUsername() {
 		return username;
@@ -40,7 +50,7 @@ public class LibroInPrestito {
 	@Override
 	public String toString() {
 		return "LibroInPrestito [titolo=" + titolo + ", username=" + username + ", idTessera=" + idTessera
-				+ ", quantita=" + quantita + "]";
+				+ ", quantita=" + quantita + ", dataAffitto=" + dataAffitto + "]";
 	}
-
+	
 	}
