@@ -18,8 +18,13 @@
 		List<Libro> listaLibri = (List<Libro>) request.getAttribute("listaLibri");
 	%>
 	<div class="container">
+	<br>
+
+	<br> 
 		<div class="row">
-			<div class="col-xl align-self-center ">
+	
+			<div class="col-xl align-self-up ">
+				<h3>Libri presenti in biblioteca</h3>
 				<table class="table table-striped">
 
 					<tr>
@@ -44,7 +49,9 @@
 					%>
 				</table>
 			</div>
-			<div class="col-xl align-self-center ">
+			
+			<div class="col-xl align-self-up ">
+			 <h3>Inserisci nuovo libro</h3> <br> 
 				<form action="aggiungi" method="post">
 					<div class="input-group input-group-sm mb-3">
 						<div class="input-group-prepend">

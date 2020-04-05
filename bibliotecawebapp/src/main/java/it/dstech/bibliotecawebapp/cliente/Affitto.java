@@ -63,13 +63,24 @@ public class Affitto extends HttpServlet{
 					req.setAttribute("username", username);
 					req.setAttribute("listaLibri", db.stampaListaLibri());
 					req.setAttribute("mess", "Libro aggiunto con successo");
+					req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+	                
 					} else {
 						req.setAttribute("idTessera", idTessera);
 						req.setAttribute("username", username);
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Quantità libri non disponibile");
+						req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
 	    			}
-	            }
+	            } else {
+	            	
+					req.setAttribute("idTessera", idTessera);
+				req.setAttribute("username", username);
+				req.setAttribute("listaLibri", db.stampaListaLibri());
+				req.setAttribute("mess", "Affitto effettuato");
+				req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+                
+				}
 				db.close();
 				
 			} catch (SQLException e) {

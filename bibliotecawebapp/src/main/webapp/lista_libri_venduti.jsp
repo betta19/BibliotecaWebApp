@@ -1,4 +1,5 @@
 
+<%@page import="it.dstech.bibliotecawebapp.modelli.LibroVenduto"%>
 <%@page import="it.dstech.bibliotecawebapp.modelli.Acquisto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -15,7 +16,7 @@
 </head>
 <body>
 	<%
-		List<Acquisto> listaAcquisti = (List<Acquisto>) request.getAttribute("listaLibriVenduti");
+		List<LibroVenduto> listaAcquisti = (List<LibroVenduto>) request.getAttribute("listaLibriVenduti");
 	%>
 
 
@@ -28,19 +29,17 @@
 			
 			<th>Titolo</th>
 			<th>Quantità</th>
-			<th>Prezzo</th>
 			<th>Username</th>
 			<th>Scontrino</th>
 		</tr>
 		<%
-			for (Acquisto a : listaAcquisti) {
+			for (LibroVenduto a : listaAcquisti) {
 		%>
 
 		<tr>
 			
 			<td><%=a.getTitolo()%></td>
 			<td><%=a.getQuantita()%></td>
-			<td><%=a.getPrezzo()%></td>
 			<td><%=a.getUsername()%></td>
 			<td><%=a.getIdScontrino()%></td>
 		</tr>

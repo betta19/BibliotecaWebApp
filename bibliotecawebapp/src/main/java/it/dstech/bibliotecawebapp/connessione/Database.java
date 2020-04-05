@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import it.dstech.bibliotecawebapp.modelli.Acquisto;
 import it.dstech.bibliotecawebapp.modelli.Libro;
 import it.dstech.bibliotecawebapp.modelli.LibroInPrestito;
 import it.dstech.bibliotecawebapp.modelli.LibroVenduto;
@@ -314,7 +313,7 @@ public List<Tessera> stampaPrestiti(String username) throws SQLException {
 public  List<LibroInPrestito> stampaLibriInPrestito(int idTessera)
 		throws SQLException {
 	PreparedStatement statement = connessione
-			.prepareStatement("select username, titolo, quantita, dataAffitto from prestito where idTessera = ?;");
+			.prepareStatement("select username, titolo, quantita, dataAffitto, dataFine from prestito where idTessera = ?;");
 	statement.setInt(1, idTessera);
 
 	ResultSet risultatoQuery = statement.executeQuery();
@@ -325,9 +324,10 @@ public  List<LibroInPrestito> stampaLibriInPrestito(int idTessera)
 		String titolo = risultatoQuery.getString("titolo");
 		int quantita = risultatoQuery.getInt("quantita");
 		String dataAffitto = risultatoQuery.getString("dataAffitto");
+		String dataFine= risultatoQuery.getString("dataFine");
 		
 
-		LibroInPrestito l = new LibroInPrestito(titolo, username, idTessera, quantita, dataAffitto);
+		LibroInPrestito l = new LibroInPrestito(titolo, username, idTessera, quantita, dataAffitto, dataFine);
 		elenco.add(l);
 
 	}
@@ -360,19 +360,18 @@ public List<LibroInPrestito> ordinaData() throws SQLException {
 	List<LibroInPrestito> lista = new ArrayList<>();
 	while (risultato.next()) {
 		LibroInPrestito l  = new LibroInPrestito( risultato.getString("titolo"), risultato.getString("username"), risultato.getInt("idTessera"), risultato.getInt("quantita"),
-				risultato.getString("dataAffitto"));
+				risultato.getString("dataAffitto"), risultato.getString("dataFine"));
 		lista.add(l);
 	}
 	return lista;
 }
-public List<Acquisto> stampaLibriVenduti() throws SQLException {
+public List<LibroVenduto> stampaLibriVenduti() throws SQLException {
 	PreparedStatement state = connessione.prepareStatement("select * from acquisto;");
 	ResultSet risultato = state.executeQuery();
-	List<Acquisto> lista = new ArrayList<>();
+	List<LibroVenduto> lista = new ArrayList<>();
 	while (risultato.next()) {
-		Acquisto a = new Acquisto(risultato.getInt("idLibro"), risultato.getString("titolo"),
-				risultato.getInt("quantita"), risultato.getDouble("prezzo"), risultato.getString("username"),
-				risultato.getInt("idScontrino"));
+		LibroVenduto a = new LibroVenduto(risultato.getInt("idScontrino"), risultato.getString("username"),
+				risultato.getString("titolo"), risultato.getInt("quantita"));
 		lista.add(a);
 	}
 	return lista;
@@ -384,9 +383,10 @@ public List<LibroInPrestito> stampaLibriPrestati() throws SQLException {
 	List<LibroInPrestito> lista = new ArrayList<>();
 	while (risultato.next()) {
 		LibroInPrestito l = new LibroInPrestito(risultato.getString("titolo"), risultato.getString("username"), risultato.getInt("idTessera"),
-				risultato.getInt("quantita"), risultato.getString("dataAffitto"));
+				risultato.getInt("quantita"), risultato.getString("dataAffitto"), risultato.getString("dataFine"));
 		lista.add(l);
 	}
 	return lista;
-}
+} 
+
 }
