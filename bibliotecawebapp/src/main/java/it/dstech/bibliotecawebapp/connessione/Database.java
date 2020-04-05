@@ -166,7 +166,7 @@ public void updateQuantitaLibri (String titolo, int quantita) throws SQLExceptio
 					lista.get(i).setDisponibilita(nuovaDisponibilita);
 					updateTabellaLibro(titolo, nuovaQuantita, nuovaDisponibilita);
 					
-		}
+		} 
 	}
 } 
 public void updateLibri(String titolo, int quantita, int qtV, int dsV) throws SQLException {
