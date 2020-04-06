@@ -208,7 +208,7 @@ public boolean totaleScontrino(int idScontrino, double spesa) throws SQLExceptio
 	
 }
 	public  List<Scontrino> stampaScontrini(String username) throws SQLException {
-		PreparedStatement statement = connessione.prepareStatement("select * from scontrino where username = ?;");
+		PreparedStatement statement = connessione.prepareStatement("select * from scontrino where username = ? ORDER BY STR_TO_DATE(data,\"%d/%m/%Y\") desc;");
 		statement.setString(1, username);
 
 		ResultSet risultatoQuery = statement.executeQuery();
@@ -290,7 +290,7 @@ public boolean totaleScontrino(int idScontrino, double spesa) throws SQLExceptio
 }
 
 public List<Tessera> stampaPrestiti(String username) throws SQLException {
-	PreparedStatement statement = connessione.prepareStatement("select * from tessera where username = ?;");
+	PreparedStatement statement = connessione.prepareStatement("select * from tessera where username = ? ORDER BY STR_TO_DATE(data,\"%d/%m/%Y\") desc;");
 	statement.setString(1, username);
 
 	ResultSet risultatoQuery = statement.executeQuery();
