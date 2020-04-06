@@ -20,8 +20,6 @@ import it.dstech.bibliotecawebapp.modelli.Scontrino;
 import it.dstech.bibliotecawebapp.modelli.Tessera;
 import it.dstech.bibliotecawebapp.modelli.Utente;
 
-
-
 public class Database {
 	
 	
@@ -388,5 +386,30 @@ public List<LibroInPrestito> stampaLibriPrestati() throws SQLException {
 	}
 	return lista;
 } 
+public void cancellaScontrinoVuoto(int idScontrino, String username) throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("DELETE from scontrino where idScontrino = ? and username = ?;");
+	state.setInt(1, idScontrino);
+	state.setString(2, username);
+	state.execute();
+}
+public void cancellaAcquistoVuoto(int idScontrino, String username) throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("DELETE from acquisto where idScontrino = ? and username = ?;");
+	state.setInt(1, idScontrino);
+	state.setString(2, username);
+	state.execute();
+}
+
+public void cancellaPrestitoVuoto(int idTessera, String username) throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("DELETE from prestito where idTessera = ? and username = ?;");
+	state.setInt(1, idTessera);
+	state.setString(2, username);
+	state.execute();
+}
+public void cancellaTesseraVuoto(int idTessera, String username) throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("DELETE from tessera where idTessera = ? and username = ?;");
+	state.setInt(1, idTessera);
+	state.setString(2, username);
+	state.execute();
+}
 
 }
