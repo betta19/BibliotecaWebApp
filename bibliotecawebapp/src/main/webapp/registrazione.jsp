@@ -6,13 +6,12 @@
 
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>Insert title here</title>
 </head>
 <body>
-<%String nome = (String) request.getAttribute("username"); %>
 
 <br>
-<h2><p class="text-xl-center">Effettua Login</p></h2><br><br>
+<h2><p class="text-xl-center">Effettua la registrazione</p></h2><br>
 <% String mess = (String) request.getAttribute("mess"); 
 	if (mess != null ){
 		%>
@@ -24,27 +23,27 @@
 
 
 %><br>
-<form action="login" method="post">
+<form action="registrazione" method="post" enctype = "multipart/form-data">
   <div class="login">
     <p class="text-xl-center">Inserisci la tua mail</p>
-    <input type="text" class="form-control" id="username" name="username" style="width:250px; height:50px;margin:auto" placeholder="Mail">
+    <input type="text" class="form-control" id="username" name="username" style="width:250px; height:50px;margin:auto" placeholder="Mail"> <br>
       <p class="text-xl-center">Inserisci la tua password</p>
     <input type="password" class="form-control" id="password" name="password" style="width:250px; height:50px;margin:auto" placeholder="Password">
+ <br> <p class="text-xl-center"> 
+ <input type="file"  id="image" name="image" placeholder="Inserisci immagine profilo">
+ </p>
+   
 </div>
- <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Accedi">
-  <input type="hidden" id="username" name="username" value=<%=nome%>>
+<br>
+  <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Registrati">
+
+
 </form>
 <br><br>
-
- 
-  
 
   
 <form action="home.jsp">
   <input type="submit"  class="btn btn-outline-secondary btn-block" style="width:150px; height:50px;margin:auto" value="Torna Indietro">
 </form>
-</head>
-<body>
-
 </body>
 </html>

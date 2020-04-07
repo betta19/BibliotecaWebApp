@@ -28,10 +28,11 @@ public class Login extends HttpServlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		String azione = req.getParameter("action");
+	
 
 		try {
 			Database db = new Database();
-			Utente utente = db.getUtente(username, password);
+			Utente utente = db.getCliente(username, password);
 			
 
 			if (azione.equalsIgnoreCase("Accedi")) {
@@ -50,6 +51,7 @@ public class Login extends HttpServlet {
 					}
 					
 					else {
+					req.setAttribute("utente", utente);
 					req.setAttribute("username", username);
 					db.close();
 					
@@ -73,10 +75,9 @@ public class Login extends HttpServlet {
 				}
 			}
 
-			else if (azione.equalsIgnoreCase("Registrati")) {
-
+			
 				
-				if (username.equals(getInitParameter("username"))) {
+				 /*if (username.equals(getInitParameter("username"))) {
 					req.setAttribute("mess", "Se sei l'amministratore, effettua l'accesso");
 
 					req.getRequestDispatcher("login.jsp").forward(req, resp);
@@ -103,13 +104,13 @@ public class Login extends HttpServlet {
 					req.getRequestDispatcher("login.jsp").forward(req, resp);
 					}
 				}
-				}
+				}  */
 
 			
 
 		}
 
-		catch (ClassNotFoundException | SQLException | MessagingException e) {
+		catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -121,8 +122,4 @@ public class Login extends HttpServlet {
 		return "L'utente " + mailUtente + " non ha ancora validato l'email";
 	}
 	
-	private String generaLinkValidazioneUtente(Utente utente) {
-		String validationPath = "http://localhost:8080/bibliotecawebapp/validazione?utente=";
-		return "Per attivare la mail clicca su questo link: " + validationPath + utente.getUsername();
-	}
 }

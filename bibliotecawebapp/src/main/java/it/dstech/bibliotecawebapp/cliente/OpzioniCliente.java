@@ -4,15 +4,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import it.dstech.bibliotecawebapp.connessione.Database;
+import it.dstech.bibliotecawebapp.modelli.Utente;
 
 @WebServlet(name = "opzioniCliente", urlPatterns = { "/opzioniCliente" })
-
+@MultipartConfig
 public class OpzioniCliente extends HttpServlet {
 
 	@Override
@@ -60,6 +63,10 @@ public class OpzioniCliente extends HttpServlet {
 				req.setAttribute("listaLibriTessera", db.stampaLibriInPrestito(idTessera));
 				db.close();
 				req.getRequestDispatcher("listaLibriTessera.jsp").forward(req, resp);
+			} else if (azione.equalsIgnoreCase("Visualizza profilo")) {
+				req.setAttribute("utente", db.prendiImmagine(username));
+				db.close();
+				req.getRequestDispatcher("profilo.jsp").forward(req, resp);
 			}
 
 		} catch (ClassNotFoundException | IOException | SQLException e) {

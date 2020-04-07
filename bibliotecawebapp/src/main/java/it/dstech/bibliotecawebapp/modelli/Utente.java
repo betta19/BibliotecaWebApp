@@ -5,8 +5,44 @@ public class Utente {
 	private String username;
 	private String password;
 	private boolean active;
+	private String image;
+	
+	
 
 	
+	public Utente(String username, String password, boolean active, String image) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.active = active;
+		this.image = image;
+	}
+
+
+
+
+
+	public Utente(String username, String image) {
+		super();
+		this.username = username;
+		this.image = image;
+	}
+
+
+
+
+
+	public Utente(String username, String password, String image) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.image = image;
+	}
+
+
+
+
+
 	public Utente(String username, String password, boolean active) {
 		super();
 		this.username = username;
@@ -47,6 +83,22 @@ public class Utente {
 	}
 	
 	
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+
+
 
 	@Override
 	public int hashCode() {

@@ -28,9 +28,8 @@ body {
 
 	<form action="home">
 
-		<input type="submit" class="btn btn-outline-warning"
-			style="width: 100vw; height: 100vh; opacity: 60%;" value="Entra">
-
+		<input type="submit" class="btn btn-outline-warning" name = "scegli" value="Registrati">
+<input type="submit" class="btn btn-outline-warning" name = "scegli"value="Login">
 	</form>
 
 
