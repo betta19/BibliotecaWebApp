@@ -5,7 +5,10 @@
 <html>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <head>
+
 <meta charset="ISO-8859-1">
 <title>Profilo</title>
 </head>
@@ -15,8 +18,8 @@
 <%Utente utente = (Utente) request.getAttribute("utente"); %>
 <h2><p class="text-xl-center">Ciao, <%=utente.getUsername()%></p></h2><br><br>
 <div class="container">
-<img alt="image" class="image-circle" width="304" height="236" src="data:image/jpg;base64, <%= utente.getImage() %>"> <br>
-
+<img alt="image" class="rounded mx-auto d-block img-circle" width="404" height="336" src="data:image/jpg;base64, <%= utente.getImage() %>"> <br>
+</div>
 <% String mess = (String) request.getAttribute("mess"); 
 	if (mess != null ){
 		%>
@@ -28,7 +31,7 @@
 
 	</form> <br> <br>
 	<form action="tornaIndietro" method="post">
-  <input type="submit" class="btn btn-outline-secondary" value="Torna Indietro">
+  <input type="submit" class="btn btn-outline-secondary  rounded mx-auto d-block" value="Torna Indietro">
   <input type="hidden" id="username" name="username" value=<%=utente.getUsername()%>>  
   
 </form>
