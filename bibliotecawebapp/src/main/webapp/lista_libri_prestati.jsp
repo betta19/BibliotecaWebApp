@@ -33,9 +33,10 @@
 	<table class="table table-striped">
 
 		<tr>
-			<th>Id Prestito</th>
+			
 			<th>Titolo</th>
 			<th>Data Affitto</th>
+			<th>Data Fine</th>
 			<th>Username</th>
 			<th>Sollecitazione</th>
 
@@ -45,16 +46,17 @@
 		%>
 
 		<tr>
-			<td><%=p.getIdTessera()%></td>
+			
 			<td><%=p.getTitolo()%></td>
 			<td><%=p.getDataAffitto()%></td>
+			<td><%=p.getDataFine()%></td>
 			<td><%=p.getUsername()%></td>
 			<td>
 				<form action="auto" method="post">
-					<input type="submit" name="azione" value="Sollecita"> <input
-						type="hidden" id="Utente" name="Utente" value=<%=p.getUsername()%>>
+					<input type="submit" class="btn btn-secondary" name="azione" value="Sollecita"> <input
+						type="hidden" id="username" name="username" value=<%=p.getUsername()%>>
 						<input type="hidden" id="data" name="data" value=<%=p.getDataAffitto()%>>
-							<input type="hidden" id="titolo" name="titolo" value=<%=p.getTitolo()%>>
+						<input type="hidden" id="titolo" name="titolo" value=<%=p.getTitolo()%>>
 				</form>
 			</td>
 		</tr>

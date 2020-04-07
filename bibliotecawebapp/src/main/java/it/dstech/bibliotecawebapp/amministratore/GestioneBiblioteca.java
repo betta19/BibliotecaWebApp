@@ -25,6 +25,7 @@ public class GestioneBiblioteca extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String azione = req.getParameter("azione");
+		
 		if (azione.equalsIgnoreCase("Aggiungi un libro")) {
 			try {
 				Database db = new Database();
@@ -75,6 +76,7 @@ public class GestioneBiblioteca extends HttpServlet {
 		} else if (azione.equalsIgnoreCase("Stampa lista libri prestati")) {
 			try {
 				Database db = new Database();
+			
 				req.setAttribute("listaLibriPrestati", db.stampaLibriPrestati());
 				db.close();
 			} catch (ClassNotFoundException | SQLException e) {

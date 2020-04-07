@@ -21,7 +21,7 @@ public class InvioMailAutomatica extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String indirizzo = req.getParameter("Utente");
+		String indirizzo = req.getParameter("username");
 		String oggetto = "Sollecitazione";
 		String contenuto = "La esortiamo a restituire il libro" + req.getParameter("titolo") + " che andava consegnato in data "
 				+ calcoloData(req.getParameter("data"));
