@@ -290,7 +290,7 @@ public boolean totaleScontrino(int idScontrino, double spesa) throws SQLExceptio
 }
 
 public List<Tessera> stampaPrestiti(String username) throws SQLException {
-	PreparedStatement statement = connessione.prepareStatement("select * from tessera where username = ? ORDER BY STR_TO_DATE(data,\"%d/%m/%Y\") desc;");
+	PreparedStatement statement = connessione.prepareStatement("select * from tessera where username = ? ORDER BY STR_TO_DATE(dataAffitto,\"%d/%m/%Y\") desc;");
 	statement.setString(1, username);
 
 	ResultSet risultatoQuery = statement.executeQuery();
@@ -380,12 +380,12 @@ public List<LibroInPrestito> stampaLibriPrestati() throws SQLException {
 	ResultSet risultato = state.executeQuery();
 	List<LibroInPrestito> lista = new ArrayList<>();
 	while (risultato.next()) {
-		LibroInPrestito l = new LibroInPrestito(risultato.getString("titolo"), risultato.getString("username"), risultato.getInt("idTessera"),
-				risultato.getInt("quantita"), risultato.getString("dataAffitto"), risultato.getString("dataFine"));
-		lista.add(l);
+		LibroInPrestito a = new LibroInPrestito(risultato.getString("titolo"), risultato.getString("username"), risultato.getInt("idTessera"), 
+				risultato.getInt("quantita"), risultato.getString("dataAffitto"), risultato.getString("dataDiFine"));
+		lista.add(a);
 	}
 	return lista;
-} 
+}
 public void cancellaScontrinoVuoto(int idScontrino, String username) throws SQLException {
 	PreparedStatement state = connessione.prepareStatement("DELETE from scontrino where idScontrino = ? and username = ?;");
 	state.setInt(1, idScontrino);
