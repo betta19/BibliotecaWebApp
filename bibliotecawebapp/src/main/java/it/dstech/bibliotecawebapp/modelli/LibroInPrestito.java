@@ -38,7 +38,7 @@ public class LibroInPrestito {
 	public void setDataAffitto(String dataAffitto) {
 		this.dataAffitto = dataAffitto;
 	}
-	public String getUsername() {
+	public String getUsername() { 
 		return username;
 	}
 	public void setUsername(String username) {
