@@ -51,7 +51,7 @@
 			<td><%=p.getDataAffitto()%></td>
 			<td><%=p.getDataFine()%></td>
 			<td><%=p.getUsername()%></td>
-			<td>
+			
 				<form action="auto" method="post">
 					<input type="submit" class="btn btn-secondary" name="azione" value="Sollecita"> <input
 						type="hidden" id="username" name="username" value=<%=p.getUsername()%>>
