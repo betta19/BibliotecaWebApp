@@ -311,7 +311,7 @@ public List<Tessera> stampaPrestiti(String username) throws SQLException {
 public  List<LibroInPrestito> stampaLibriInPrestito(int idTessera)
 		throws SQLException {
 	PreparedStatement statement = connessione
-			.prepareStatement("select username, titolo, quantita, dataAffitto, dataFine from prestito where idTessera = ?;");
+			.prepareStatement("select username, titolo, quantita, dataAffitto, dataDiFine from prestito where idTessera = ?;");
 	statement.setInt(1, idTessera);
 
 	ResultSet risultatoQuery = statement.executeQuery();
@@ -322,7 +322,7 @@ public  List<LibroInPrestito> stampaLibriInPrestito(int idTessera)
 		String titolo = risultatoQuery.getString("titolo");
 		int quantita = risultatoQuery.getInt("quantita");
 		String dataAffitto = risultatoQuery.getString("dataAffitto");
-		String dataFine= risultatoQuery.getString("dataFine");
+		String dataFine= risultatoQuery.getString("dataDiFine");
 		
 
 		LibroInPrestito l = new LibroInPrestito(titolo, username, idTessera, quantita, dataAffitto, dataFine);
