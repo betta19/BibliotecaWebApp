@@ -117,7 +117,7 @@ table, th, td {
 	<%
 		}
 	%>
-	<form action="affitto" method="post">
+	<form action="cliente/affitto" method="post">
 		<input type="submit" class="btn btn-outline-secondary" name="azione"
 			value="Torna Indietro"> 
 		<%

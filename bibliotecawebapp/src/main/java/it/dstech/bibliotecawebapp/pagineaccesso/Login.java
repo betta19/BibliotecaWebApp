@@ -49,7 +49,7 @@ public class Login extends HttpServlet {
 						session.setAttribute("username", username);
 						req.setAttribute("message", scriviRispostaUtenteNonAttivo(utente));
 						db.close();
-						req.getRequestDispatcher("/login.jsp").forward(req, resp);
+						req.getRequestDispatcher("login.jsp").forward(req, resp);
 					}
 					
 					else {
@@ -57,7 +57,7 @@ public class Login extends HttpServlet {
 					session.setAttribute("username", username);
 					db.close();
 					
-					req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
+					req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
 				}
 				}
 				else if (username.equals(getInitParameter("username"))

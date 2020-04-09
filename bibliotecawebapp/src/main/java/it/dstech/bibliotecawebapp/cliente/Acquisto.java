@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import it.dstech.bibliotecawebapp.connessione.Database;
 
-@WebServlet (name = "acquisto", urlPatterns = { "/acquisto" })
+@WebServlet (name = "acquisto", urlPatterns = { "/cliente/acquisto" })
 public class Acquisto extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,7 +52,7 @@ public class Acquisto extends HttpServlet {
 							req.setAttribute("mess", "Quantità libri non disponibile");
 						}
 						db.close();
-						req.getRequestDispatcher("acquisto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/acquisto.jsp").forward(req, resp);
 					} else {
 						// quando lo scontrino già esiste e aggiungi un prodotto
 						String idSc = req.getParameter("idScontrino");
@@ -73,7 +73,7 @@ public class Acquisto extends HttpServlet {
 							req.setAttribute("mess", "Quantità libri non disponibile");
 						}
 						db.close();
-						req.getRequestDispatcher("acquisto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/acquisto.jsp").forward(req, resp);
 
 					}
 				} else {
@@ -83,7 +83,7 @@ public class Acquisto extends HttpServlet {
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Non puoi aggiungere 0 prodotti!");
 						db.close();
-						req.getRequestDispatcher("acquisto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/acquisto.jsp").forward(req, resp);
 					} else {
 						// lo scontrino esiste e premi aggiungi senza scrivere nulla
 						String idSc = req.getParameter("idScontrino");
@@ -93,7 +93,7 @@ public class Acquisto extends HttpServlet {
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Non puoi aggiungere 0 prodotti!");
 						db.close();
-						req.getRequestDispatcher("acquisto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/acquisto.jsp").forward(req, resp);
 
 					}
 				}
@@ -122,7 +122,7 @@ public class Acquisto extends HttpServlet {
 							double spesa = db.getPrezzo(idNuovo);
 							db.totaleScontrino(idNuovo, spesa);
 							db.close();
-							req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+							req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 						} else {
 							// non ci sono sufficienti libri
 							req.setAttribute("idScontrino", idNuovo);
@@ -130,7 +130,7 @@ public class Acquisto extends HttpServlet {
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Quantità libri non disponibile");
 							db.close();
-							req.getRequestDispatcher("acquisto.jsp").forward(req, resp);
+							req.getRequestDispatcher("/acquisto.jsp").forward(req, resp);
 						}
 
 					} else {
@@ -149,7 +149,7 @@ public class Acquisto extends HttpServlet {
 							double spesa = db.getPrezzo(idScontrino);
 							db.totaleScontrino(idScontrino, spesa);
 							db.close();
-							req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+							req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 						} else {
 							// scontrino già esiste e non c'è sufficiente quantità
 							req.setAttribute("idScontrino", idScontrino);
@@ -157,7 +157,7 @@ public class Acquisto extends HttpServlet {
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Quantità libri non disponibile");
 							db.close();
-							req.getRequestDispatcher("acquisto.jsp").forward(req, resp);
+							req.getRequestDispatcher("/acquisto.jsp").forward(req, resp);
 						}
 					}
 				} else {
@@ -167,7 +167,7 @@ public class Acquisto extends HttpServlet {
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Non puoi pagare 0 prodotti!");
 						db.close();
-						req.getRequestDispatcher("acquisto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/acquisto.jsp").forward(req, resp);
 					} else {
 						// quando non scrivi nulla, lo scontrino già esiste ma Paghi lo stesso tutto
 						// quello che c'è nel carrello
@@ -180,7 +180,7 @@ public class Acquisto extends HttpServlet {
 						double spesa = db.getPrezzo(idScontrino);
 						db.totaleScontrino(idScontrino, spesa);
 						db.close();
-						req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+						req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 					}
 				}
 
@@ -196,7 +196,7 @@ public class Acquisto extends HttpServlet {
 
 				if (req.getParameter("idScontrino") == null) {
 				//	req.setAttribute("username", username);
-					req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+					req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 				} else {
 					String idSc = req.getParameter("idScontrino");
 					int idScontrino = Integer.parseInt(idSc);
@@ -206,7 +206,7 @@ public class Acquisto extends HttpServlet {
 					db.cancellaScontrinoVuoto(idScontrino, username);
 					db.cancellaAcquistoVuoto(idScontrino, username);
 					db.close();
-					req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+					req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

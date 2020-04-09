@@ -37,7 +37,7 @@
     </td>    
      
     <td>
-    <form action="opzioniCliente" method="post">
+    <form action="cliente/opzioniCliente" method="post">
   <input type="submit" name="action" value="Info">
   <input type="number" hidden="true" id="id" name="id" value=<%=t.getIdTessera()%>>
 	</form>  
@@ -46,7 +46,7 @@
   <% } %> 
 	
 </table> <br><br>
-<form action="tornaIndietro" method="post">
+<form action="cliente/tornaIndietro" method="post">
   <input type="submit" class="btn btn-outline-secondary" value="Torna Indietro">
 
   

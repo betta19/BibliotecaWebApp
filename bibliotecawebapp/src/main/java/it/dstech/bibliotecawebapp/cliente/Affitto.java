@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import it.dstech.bibliotecawebapp.connessione.Database;
 
-@WebServlet (name = "affitto", urlPatterns = { "/affitto" })			
+@WebServlet (name = "affitto", urlPatterns = { "/cliente/affitto" })			
 public class Affitto extends HttpServlet{
 
 	@Override
@@ -50,7 +50,7 @@ public class Affitto extends HttpServlet{
 							req.setAttribute("mess", "Quantità libri non disponibile");
 						}
 						db.close();
-						req.getRequestDispatcher("affitto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/affitto.jsp").forward(req, resp);
 					} else {
 						// quando lo scontrino già esiste e aggiungi un prodotto
 						String idSc = req.getParameter("idTessera");
@@ -71,7 +71,7 @@ public class Affitto extends HttpServlet{
 							req.setAttribute("mess", "Quantità libri non disponibile");
 						}
 						db.close();
-						req.getRequestDispatcher("affitto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/affitto.jsp").forward(req, resp);
 
 					}
 				} else {
@@ -81,7 +81,7 @@ public class Affitto extends HttpServlet{
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Non puoi aggiungere 0 prodotti!");
 						db.close();
-						req.getRequestDispatcher("affitto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/affitto.jsp").forward(req, resp);
 					} else {
 						// lo scontrino esiste e premi aggiungi senza scrivere nulla
 						String idSc = req.getParameter("idTessera");
@@ -91,7 +91,7 @@ public class Affitto extends HttpServlet{
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Non puoi aggiungere 0 prodotti!");
 						db.close();
-						req.getRequestDispatcher("affitto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/affitto.jsp").forward(req, resp);
 
 					}
 				}
@@ -118,7 +118,7 @@ public class Affitto extends HttpServlet{
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Libro aggiunto con successo e pagamento effettuato");
 							db.close();
-							req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+							req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 						} else {
 							// non ci sono sufficienti libri
 							req.setAttribute("idTessera", idNuovo);
@@ -126,7 +126,7 @@ public class Affitto extends HttpServlet{
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Quantità libri non disponibile");
 							db.close();
-							req.getRequestDispatcher("affitto.jsp").forward(req, resp);
+							req.getRequestDispatcher("/affitto.jsp").forward(req, resp);
 						}
 
 					} else {
@@ -143,7 +143,7 @@ public class Affitto extends HttpServlet{
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Libro aggiunto con successo");
 							db.close();
-							req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+							req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 						} else {
 							// scontrino già esiste e non c'è sufficiente quantità
 							req.setAttribute("idTessera", idTessera);
@@ -151,7 +151,7 @@ public class Affitto extends HttpServlet{
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Quantità libri non disponibile");
 							db.close();
-							req.getRequestDispatcher("affitto.jsp").forward(req, resp);
+							req.getRequestDispatcher("/affitto.jsp").forward(req, resp);
 						}
 					}
 				} else {
@@ -161,7 +161,7 @@ public class Affitto extends HttpServlet{
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Non puoi prenotare 0 prodotti!");
 						db.close();
-						req.getRequestDispatcher("affitto.jsp").forward(req, resp);
+						req.getRequestDispatcher("/affitto.jsp").forward(req, resp);
 					} else {
 						// quando non scrivi nulla, lo scontrino già esiste ma Paghi lo stesso tutto
 						// quello che c'è nel carrello
@@ -172,7 +172,7 @@ public class Affitto extends HttpServlet{
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Pagamento effettuato con successo");
 						db.close();
-						req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+						req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 					}
 				}
 
@@ -188,7 +188,7 @@ public class Affitto extends HttpServlet{
 
 				if (req.getParameter("idTessera") == null) {
 				//	req.setAttribute("username", username);
-					req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+					req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 				} else {
 					String idSc = req.getParameter("idTessera");
 					int idTessera = Integer.parseInt(idSc);
@@ -198,7 +198,7 @@ public class Affitto extends HttpServlet{
 					db.cancellaTesseraVuoto(idTessera, username);
 					db.cancellaPrestitoVuoto(idTessera, username);
 					db.close();
-					req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
+					req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

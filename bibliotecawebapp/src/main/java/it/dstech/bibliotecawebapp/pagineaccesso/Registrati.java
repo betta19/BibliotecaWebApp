@@ -20,7 +20,7 @@ import it.dstech.bibliotecawebapp.modelli.Utente;
 
 @WebServlet(name = "registrazione", urlPatterns = { "/registrazione" })
 @MultipartConfig
-public class Registrati extends HttpServlet {
+public class Registrati extends HttpServlet {  
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

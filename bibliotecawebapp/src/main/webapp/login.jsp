@@ -24,7 +24,7 @@
 
 
 %><br>
-<form action="login" method="post">
+<form action="cliente/login" method="post">
   <div class="login">
     <p class="text-xl-center">Inserisci la tua mail</p>
     <input type="text" class="form-control" id="username" name="username" style="width:250px; height:50px;margin:auto" placeholder="Mail">

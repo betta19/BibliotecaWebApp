@@ -27,14 +27,24 @@ public class FiltroCliente implements Filter {
 HttpServletRequest req = (HttpServletRequest) request;
 HttpServletResponse resp = (HttpServletResponse) response;
 HttpSession session = (HttpSession) req.getSession();
+String loginURI = req.getContextPath() + "/login.jsp";
+
+boolean loggedIn = session != null && session.getAttribute("utente") != null;
+boolean loginRequest = req.getRequestURI().equals(loginURI);
+
+if (loggedIn || loginRequest) {
+    chain.doFilter(request, response);
+} else {
+    resp.sendRedirect(loginURI);
+}
+}
+
 // if (session.getAttribute("utente") == null) {
 //	resp.sendRedirect("/login.jsp");
 // } else {
-	chain.doFilter(request, response);
+
 // }
 		
-		
-	}
 
 	@Override
 	public void destroy() {
