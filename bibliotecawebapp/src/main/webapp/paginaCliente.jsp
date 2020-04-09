@@ -12,9 +12,9 @@
 <body>
 
 <br>
-<%String nome = (String) request.getAttribute("username"); %>
+<%-- <%session.getAttribute("username"); %> --%>
 
-<h2><p class="text-xl-center">Fai una scelta, <%=request.getAttribute("username")%></p></h2><br><br>
+<h2><p class="text-xl-center">Fai una scelta, <%=session.getAttribute("username")%></p></h2><br><br>
 
 <% String mess = (String) request.getAttribute("mess"); 
 	if (mess != null ){
@@ -35,7 +35,6 @@
 <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Stampa acquisti">
 <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Stampa prestiti">
 
-  <input type="hidden" id="username" name="username" value=<%=nome%>>
 </form>  
  <br>   
 <form action="home.jsp">

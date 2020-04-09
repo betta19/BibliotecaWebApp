@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import it.dstech.bibliotecawebapp.connessione.Database;
@@ -31,6 +32,8 @@ public class Registrati extends HttpServlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		Part image = req.getPart("image");
+		HttpSession session = req.getSession();
+		
 		Database db;
 		try {
 			db = new Database();
@@ -42,7 +45,7 @@ public class Registrati extends HttpServlet {
 			} else if (db.checkRegistraUtente(username)) {
 				req.setAttribute("mess",
 						"Credenziali già presenti; provi con un altra mail, se è gia registrato per entrare nel sito cliccare su Accedi");
-				req.setAttribute("username", username);
+				session.setAttribute("username", username);
 				db.close();
 				req.getRequestDispatcher("login.jsp").forward(req, resp);
 			}
@@ -53,7 +56,7 @@ public class Registrati extends HttpServlet {
 
 					Utente u1 = new Utente(username);
 					Mail.sendEmail(u1.getUsername(), "Conferma Mail", generaLinkValidazioneUtente(u1));
-					req.setAttribute("username", username);
+					session.setAttribute("username", username);
 					req.setAttribute("mess",
 							"La registrazione sarà confermata solo dopo aver cliccato sul link che le abbiamo inviato sulla sua mail");
 					db.close();
