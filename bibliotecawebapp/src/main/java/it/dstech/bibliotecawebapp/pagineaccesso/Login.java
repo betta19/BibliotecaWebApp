@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.dstech.bibliotecawebapp.connessione.Database;
 import it.dstech.bibliotecawebapp.emailutility.Mail;
@@ -27,6 +28,7 @@ public class Login extends HttpServlet {
 
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
+		HttpSession session = req.getSession();
 		String azione = req.getParameter("action");
 	
 
@@ -44,15 +46,15 @@ public class Login extends HttpServlet {
 					
 					if (!utente.isActive()) {
 						// utente esiste ma non è stato attivato
-						req.setAttribute("username", username);
+						session.setAttribute("username", username);
 						req.setAttribute("message", scriviRispostaUtenteNonAttivo(utente));
 						db.close();
 						req.getRequestDispatcher("/login.jsp").forward(req, resp);
 					}
 					
 					else {
-					req.setAttribute("utente", utente);
-					req.setAttribute("username", username);
+					session.setAttribute("utente", utente);
+					session.setAttribute("username", username);
 					db.close();
 					
 					req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
@@ -61,8 +63,8 @@ public class Login extends HttpServlet {
 				else if (username.equals(getInitParameter("username"))
 						&& password.equals(getInitParameter("password"))) {
 
-					req.setAttribute("username", username);
-					req.setAttribute("password", password);
+					session.setAttribute("username", username);
+					session.setAttribute("password", password);
 					db.close();
 					req.getRequestDispatcher("paginaAmministratore.jsp").forward(req, resp);
 				}

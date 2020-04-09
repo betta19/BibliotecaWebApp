@@ -9,7 +9,7 @@
 <title>Login</title>
 </head>
 <body>
-<%String nome = (String) request.getAttribute("username"); %>
+<%session.getAttribute("username");%>
 
 <br>
 <h2><p class="text-xl-center">Effettua Login</p></h2><br><br>
@@ -32,7 +32,7 @@
     <input type="password" class="form-control" id="password" name="password" style="width:250px; height:50px;margin:auto" placeholder="Password">
 </div>
  <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Accedi">
-  <input type="hidden" id="username" name="username" value=<%=nome%>>
+  
 </form>
 <br><br>
 
