@@ -29,7 +29,7 @@
     <p class="text-xl-center">Inserisci la tua mail</p>
     <input type="text" class="form-control" id="username" name="username" style="width:250px; height:50px;margin:auto" placeholder="Mail">
       <p class="text-xl-center">Inserisci la tua password</p>
-    <input type="password" class="form-control" id="password" name="password" style="width:250px; height:50px;margin:auto" placeholder="Password">
+    <input type="password" class="form-control " id="password" name="password" style="width:250px; height:50px;margin:auto" placeholder="Password">
 </div>
  <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Accedi">
   <input type="hidden" id="username" name="username" value=<%=nome%>>

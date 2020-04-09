@@ -24,12 +24,10 @@ body {
 <body>
 
 
-
-
 	<form action="home">
 
-		<input type="submit" class="btn btn-outline-warning" name = "scegli" value="Registrati">
-<input type="submit" class="btn btn-outline-warning" name = "scegli"value="Login">
+		<input type="submit" class="btn btn-outline-warning" style="width:150px; height:50px;margin:auto" name = "scegli" value="Registrati">
+<input type="submit" class="btn btn-outline-warning" style="width:150px; height:50px;margin:auto" name = "scegli"value="Login">
 	</form>
 
 
