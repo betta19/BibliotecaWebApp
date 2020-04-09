@@ -15,7 +15,7 @@
 <body>
 <br>
 
-<%Utente utente = (Utente) request.getAttribute("utente"); %>
+<%Utente utente = (Utente) session.getAttribute("utenteImmagine"); %>
 <h2><p class="text-xl-center">Ciao, <%=utente.getUsername()%></p></h2><br><br>
 <div class="container">
 <img alt="image" class="rounded mx-auto d-block img-circle" width="404" height="336" src="data:image/jpg;base64, <%= utente.getImage() %>"> <br>
@@ -32,7 +32,7 @@
 	</form> <br> <br>
 	<form action="tornaIndietro" method="post">
   <input type="submit" class="btn btn-outline-secondary  rounded mx-auto d-block" value="Torna Indietro">
-  <input type="hidden" id="username" name="username" value=<%=utente.getUsername()%>>  
+
   
 </form>
 </body>

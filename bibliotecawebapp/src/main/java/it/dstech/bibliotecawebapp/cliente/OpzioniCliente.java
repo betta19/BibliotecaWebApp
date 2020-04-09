@@ -15,7 +15,7 @@ import javax.servlet.http.Part;
 import it.dstech.bibliotecawebapp.connessione.Database;
 import it.dstech.bibliotecawebapp.modelli.Utente;
 
-@WebServlet(name = "opzioniCliente", urlPatterns = { "/opzioniCliente" })
+@WebServlet(urlPatterns = { "/opzioniCliente" })
 @MultipartConfig
 public class OpzioniCliente extends HttpServlet {
 
@@ -67,7 +67,7 @@ public class OpzioniCliente extends HttpServlet {
 				db.close();
 				req.getRequestDispatcher("listaLibriTessera.jsp").forward(req, resp);
 			} else if (azione.equalsIgnoreCase("Visualizza profilo")) {
-				req.setAttribute("utente", db.prendiImmagine(username));
+				session.setAttribute("utenteImmagine", db.prendiImmagine(username));
 				db.close();
 				req.getRequestDispatcher("profilo.jsp").forward(req, resp);
 			}

@@ -12,7 +12,7 @@
 </head>
 <body>
 <% List<Tessera> listaPrestiti = (List<Tessera>)request.getAttribute("listaPrestiti"); %>
-<%String nomeUtente = (String) request.getAttribute("username"); %>
+<%-- <%String nomeUtente = (String) request.getAttribute("username"); %> --%>
 <table class="table table-striped">
   
     <h2>Libri presi in prestito</h2>
@@ -39,7 +39,6 @@
     <td>
     <form action="opzioniCliente" method="post">
   <input type="submit" name="action" value="Info">
-  <input type="hidden" id="username" name="username" value=<%=nomeUtente%>> 
   <input type="number" hidden="true" id="id" name="id" value=<%=t.getIdTessera()%>>
 	</form>  
 	</td>    
@@ -49,7 +48,7 @@
 </table> <br><br>
 <form action="tornaIndietro" method="post">
   <input type="submit" class="btn btn-outline-secondary" value="Torna Indietro">
-  <input type="hidden" id="username" name="username" value=<%=nomeUtente%>>  
+
   
 </form>
 </body>

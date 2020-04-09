@@ -19,9 +19,9 @@ table, th, td {
 <title>Insert title here</title>
 </head>
 <body>
-	<%
+<%-- 	<% 
 		String nome = (String) request.getAttribute("username");
-	%>
+	%> --%>
 	<%
 		List<Libro> lista = (List<Libro>) request.getAttribute("listaLibri");
 	%>
@@ -70,7 +70,7 @@ table, th, td {
 
 	<h2>
 		Quale libro vuoi prendere in prestito,
-		<%=request.getAttribute("username")%>
+		<%=session.getAttribute("username")%>
 		?
 	</h2>
 	<form action="affitto" method="post">
@@ -106,7 +106,7 @@ table, th, td {
 			style="height: 45px;" name="azione" value="Aggiungi al carrello">
 		<input type="submit" class="btn btn-outline-danger"
 			style="width: 120px; height: 45px;" name="azione" value="Affitta">
-		<input type="hidden" id="username" name="username" value=<%=nome%>>
+		
 		<%
 			if (request.getAttribute("idTessera") != null) {
 		%>
@@ -119,8 +119,7 @@ table, th, td {
 	%>
 	<form action="affitto" method="post">
 		<input type="submit" class="btn btn-outline-secondary" name="azione"
-			value="Torna Indietro"> <input type="hidden" id="username"
-			name="username" value=<%=nome%>>
+			value="Torna Indietro"> 
 		<%
 			if (request.getAttribute("idTessera") != null) {
 		%>

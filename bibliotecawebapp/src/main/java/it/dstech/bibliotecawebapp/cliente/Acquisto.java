@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.dstech.bibliotecawebapp.connessione.Database;
 
@@ -16,7 +17,9 @@ import it.dstech.bibliotecawebapp.connessione.Database;
 public class Acquisto extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("username");
+	
+		HttpSession session = req.getSession();
+		String username = (String) session.getAttribute("username");
 		String azione = req.getParameter("azione");
 		String titolo = req.getParameter("titolo");
 
@@ -38,13 +41,13 @@ public class Acquisto extends HttpServlet {
 							db.updateQuantitaLibri(titolo, quantita);
 
 							req.setAttribute("idScontrino", idNuovo);
-							req.setAttribute("username", username);
+						//	req.setAttribute("username", username);
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Libro aggiunto con successo");
 						} else {
 							// non ci sono sufficienti libri
 							req.setAttribute("idScontrino", idNuovo);
-							req.setAttribute("username", username);
+						//	req.setAttribute("username", username);
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Quantità libri non disponibile");
 						}
@@ -59,13 +62,13 @@ public class Acquisto extends HttpServlet {
 							db.updateQuantitaLibri(titolo, quantita);
 
 							req.setAttribute("idScontrino", idScontrino);
-							req.setAttribute("username", username);
+						//	req.setAttribute("username", username);
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Libro aggiunto con successo");
 						} else {
 							// scontrino già esiste e non c'è quantità sufficiente
 							req.setAttribute("idScontrino", idScontrino);
-							req.setAttribute("username", username);
+						//	req.setAttribute("username", username);
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Quantità libri non disponibile");
 						}
@@ -76,7 +79,7 @@ public class Acquisto extends HttpServlet {
 				} else {
 					// quando non esiste lo scontrino e premi aggiungi senza scrivere nulla
 					if (req.getParameter("idScontrino") == null) {
-						req.setAttribute("username", username);
+					//	req.setAttribute("username", username);
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Non puoi aggiungere 0 prodotti!");
 						db.close();
@@ -86,7 +89,7 @@ public class Acquisto extends HttpServlet {
 						String idSc = req.getParameter("idScontrino");
 						int idScontrino = Integer.parseInt(idSc);
 						req.setAttribute("idScontrino", idScontrino);
-						req.setAttribute("username", username);
+					//	req.setAttribute("username", username);
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Non puoi aggiungere 0 prodotti!");
 						db.close();
@@ -113,7 +116,7 @@ public class Acquisto extends HttpServlet {
 							db.updateQuantitaLibri(titolo, quantita);
 
 							req.setAttribute("idScontrino", idNuovo);
-							req.setAttribute("username", username);
+						//	req.setAttribute("username", username);
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Libro aggiunto con successo e pagamento effettuato");
 							double spesa = db.getPrezzo(idNuovo);
@@ -123,7 +126,7 @@ public class Acquisto extends HttpServlet {
 						} else {
 							// non ci sono sufficienti libri
 							req.setAttribute("idScontrino", idNuovo);
-							req.setAttribute("username", username);
+						//	req.setAttribute("username", username);
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Quantità libri non disponibile");
 							db.close();
@@ -140,7 +143,7 @@ public class Acquisto extends HttpServlet {
 							db.updateQuantitaLibri(titolo, quantita);
 
 							req.setAttribute("idScontrino", idScontrino);
-							req.setAttribute("username", username);
+						//	req.setAttribute("username", username);
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Libro aggiunto con successo");
 							double spesa = db.getPrezzo(idScontrino);
@@ -150,7 +153,7 @@ public class Acquisto extends HttpServlet {
 						} else {
 							// scontrino già esiste e non c'è sufficiente quantità
 							req.setAttribute("idScontrino", idScontrino);
-							req.setAttribute("username", username);
+						//	req.setAttribute("username", username);
 							req.setAttribute("listaLibri", db.stampaListaLibri());
 							req.setAttribute("mess", "Quantità libri non disponibile");
 							db.close();
@@ -160,7 +163,7 @@ public class Acquisto extends HttpServlet {
 				} else {
 					// quando non esiste lo scontrino e premi paga senza scrivere nulla
 					if (req.getParameter("idScontrino") == null) {
-						req.setAttribute("username", username);
+					//	req.setAttribute("username", username);
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Non puoi pagare 0 prodotti!");
 						db.close();
@@ -171,7 +174,7 @@ public class Acquisto extends HttpServlet {
 						String idSc = req.getParameter("idScontrino");
 						int idScontrino = Integer.parseInt(idSc);
 						req.setAttribute("idScontrino", idScontrino);
-						req.setAttribute("username", username);
+				//		req.setAttribute("username", username);
 						req.setAttribute("listaLibri", db.stampaListaLibri());
 						req.setAttribute("mess", "Pagamento effettuato con successo");
 						double spesa = db.getPrezzo(idScontrino);
@@ -192,13 +195,13 @@ public class Acquisto extends HttpServlet {
 			try {
 
 				if (req.getParameter("idScontrino") == null) {
-					req.setAttribute("username", username);
+				//	req.setAttribute("username", username);
 					req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
 				} else {
 					String idSc = req.getParameter("idScontrino");
 					int idScontrino = Integer.parseInt(idSc);
 					req.setAttribute("idScontrino", idScontrino);
-					req.setAttribute("username", username);
+				//	req.setAttribute("username", username);
 					db = new Database();
 					db.cancellaScontrinoVuoto(idScontrino, username);
 					db.cancellaAcquistoVuoto(idScontrino, username);
