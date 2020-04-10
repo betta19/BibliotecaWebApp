@@ -35,11 +35,10 @@
  <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Affitta libri">
 <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Stampa acquisti">
 <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Stampa prestiti">
-
+<br><br>
+<input type="submit"  class="btn btn-outline-secondary btn-block" style="width:150px; height:50px;margin:auto" name= action value="Logout">
 </form>  
  <br>   
-<form action="home.jsp">
-  <input type="submit"  class="btn btn-outline-secondary btn-block" style="width:150px; height:50px;margin:auto" value="Logout">
-  </form>
+
 </body>
 </html>

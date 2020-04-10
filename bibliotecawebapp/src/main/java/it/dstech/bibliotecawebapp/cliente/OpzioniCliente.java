@@ -71,10 +71,14 @@ public class OpzioniCliente extends HttpServlet {
 				int quantita = Integer.parseInt(req.getParameter("disp"));
 				//update tabella libro
 				db.updateTabellaLibroDopoRestituzione(titolo, quantita);
+				//rimozione libri da prestito
+				int idPrestito = Integer.parseInt(req.getParameter("prestito"));
+				db.rimuoviLibroInPrestito(idPrestito);
 				//remove prestito da cliente
 				req.setAttribute("titolo", titolo);
 				req.setAttribute("disp", quantita);
 				req.setAttribute("listaPrestiti", db.stampaPrestiti(username));
+				req.setAttribute("mess", "libro restituito con successo");
 				db.close();
 				req.getRequestDispatcher("/stampaAffitti.jsp").forward(req, resp);
 			}
@@ -84,10 +88,16 @@ public class OpzioniCliente extends HttpServlet {
 				db.close();
 				req.getRequestDispatcher("/profilo.jsp").forward(req, resp);
 			}
+			else if (azione.equalsIgnoreCase("Logout")) {
+				session.invalidate();
+				db.close();
+				resp.sendRedirect(req.getContextPath() + "/");
+			}
+
 
 		} catch (ClassNotFoundException | IOException | SQLException e) {
 
 			e.printStackTrace();
 		}
-	}
+	}     
 }

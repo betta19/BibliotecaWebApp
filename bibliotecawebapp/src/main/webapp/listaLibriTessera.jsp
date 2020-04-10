@@ -24,6 +24,7 @@
    <th>Quantità </th>
    <th>Data Affitto</th>
      <th>Data Fine Affitto</th>
+     <th>Codice</th>
      
   </tr>
   <% for(LibroInPrestito l : lista) { %>
@@ -47,12 +48,16 @@
         <td>
     <%=l.getDataFine()%>
     </td>    
+       <td>
+    <%=l.getIdPrestito()%>
+    </td>  
       <td>
        
         <form action="opzioniCliente" method="post">
   <input type="submit" name="action" value="Restituisci"> 
   <input type="hidden" id="titolo" name="titolo" value=<%=l.getTitolo()%>>
   <input type="hidden" id="disp" name="disp" value=<%=l.getQuantita()%>>
+ <input type="hidden" id="prestito" name="prestito" value=<%=l.getIdPrestito()%>>
 	</form>  
 	</td>   
     

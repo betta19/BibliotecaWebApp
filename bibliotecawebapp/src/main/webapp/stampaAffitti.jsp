@@ -11,6 +11,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<br>
+<% String mess = (String) request.getAttribute("mess"); 
+	if (mess != null ){
+		%>
+	<h4><p class="text-md-center text-danger"><%=mess%></p></h4>
+		
+					
+	<% } %>
+	
 <% List<Tessera> listaPrestiti = (List<Tessera>)request.getAttribute("listaPrestiti"); %>
 <%-- <%String nomeUtente = (String) request.getAttribute("username"); %> --%>
 <table class="table table-striped">

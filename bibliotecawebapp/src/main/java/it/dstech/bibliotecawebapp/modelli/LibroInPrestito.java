@@ -8,6 +8,7 @@ public class LibroInPrestito {
 	private int quantita;
 	private String dataAffitto;
 	private String dataFine;
+	private int idPrestito;
 	
 	
 	public LibroInPrestito(String titolo, String username, int idTessera, int quantita, String dataAffitto,
@@ -20,6 +21,28 @@ public class LibroInPrestito {
 		this.dataAffitto = dataAffitto;
 		this.dataFine = dataFine;
 	}
+	
+	public LibroInPrestito(String titolo, String username, int idTessera, int quantita, String dataAffitto,
+			String dataFine, int idPrestito) {
+		super();
+		this.titolo = titolo;
+		this.username = username;
+		this.idTessera = idTessera;
+		this.quantita = quantita;
+		this.dataAffitto = dataAffitto;
+		this.dataFine = dataFine;
+		this.idPrestito = idPrestito;
+	}
+	
+
+	public int getIdPrestito() {
+		return idPrestito;
+	}
+
+	public void setIdPrestito(int idPrestito) {
+		this.idPrestito = idPrestito;
+	}
+
 	public String getTitolo() {
 		return titolo;
 	}

@@ -30,7 +30,7 @@
 	<form action = "image" method="post">
 
 	</form> <br> <br>
-	<form action="cliente/tornaIndietro" method="post">
+	<form action="tornaIndietro" method="post">
   <input type="submit" class="btn btn-outline-secondary  rounded mx-auto d-block" value="Torna Indietro">
 
   

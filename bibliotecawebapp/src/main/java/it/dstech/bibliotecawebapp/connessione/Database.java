@@ -283,11 +283,11 @@ public class Database {
 		return idTessera;
 	}
 
-	public void inserimentoTabellaAffitto(String titolo, String username, int idTessera, int quantita)
-			throws SQLException {
-		PreparedStatement state = connessione.prepareStatement(
-				"insert into prestito (titolo, username, idTessera, quantita, dataAffitto, dataDiFine) values (?, ?, ?, ?, ?, ?);");
-		Date data = new Date();
+
+	
+	public void inserimentoTabellaAffitto(String titolo, String username, int idTessera, int quantita) throws SQLException {
+		PreparedStatement state = connessione.prepareStatement("insert into prestito (titolo, username, idTessera, quantita, dataAffitto, dataDiFine) values (?, ?, ?, ?, ?, ?);");
+		java.util.Date data = new java.util.Date();
 		DateFormat formato = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
 		state.setString(1, titolo);
 		state.setString(2, username);
@@ -355,7 +355,7 @@ public class Database {
 
 	public List<LibroInPrestito> stampaLibriInPrestito(int idTessera) throws SQLException {
 		PreparedStatement statement = connessione.prepareStatement(
-				"select username, titolo, quantita, dataAffitto, dataDiFine from prestito where idTessera = ?;");
+				"select idPrestito, username, titolo, quantita, dataAffitto, dataDiFine from prestito where idTessera = ?;");
 		statement.setInt(1, idTessera);
 
 		ResultSet risultatoQuery = statement.executeQuery();
@@ -367,8 +367,9 @@ public class Database {
 			int quantita = risultatoQuery.getInt("quantita");
 			String dataAffitto = risultatoQuery.getString("dataAffitto");
 			String dataFine = risultatoQuery.getString("dataDiFine");
+			int idPrestito  = risultatoQuery.getInt("idPrestito");
 
-			LibroInPrestito l = new LibroInPrestito(titolo, username, idTessera, quantita, dataAffitto, dataFine);
+			LibroInPrestito l = new LibroInPrestito(titolo, username, idTessera, quantita, dataAffitto, dataFine, idPrestito);
 			elenco.add(l);
 
 		}
@@ -376,18 +377,21 @@ public class Database {
 		return elenco;
 
 	}
+
+	
 	public String calcoloData(String dataInizio) {
-        String[] d = dataInizio.split("/");
-        System.out.println(d[0] + " , " + d[1] + " , " + d[2]);
-        Calendar data1 = Calendar.getInstance();
+		String[] d = dataInizio.split("/");
+		
+		Calendar data1 = Calendar.getInstance();
 
-        data1.set(Calendar.DATE, Integer.parseInt(d[0]));
-        data1.set(Calendar.MONTH, Integer.parseInt(d[1]));
-        data1.set(Calendar.YEAR, Integer.parseInt(d[2]));
+		data1.set(Calendar.DATE, Integer.parseInt(d[0]));
+		data1.set(Calendar.MONTH, Integer.parseInt(d[1]));
+		data1.set(Calendar.YEAR, Integer.parseInt(d[2]));
 
-        data1.add(Calendar.DATE, 30);
+		data1.add(Calendar.DATE, 30);
 
-        return data1.get(Calendar.DATE) + "/" + data1.get(Calendar.MONTH) + "/" + data1.get(Calendar.YEAR);
+		return data1.get(Calendar.DATE) + "/" + data1.get(Calendar.MONTH) + "/" + data1.get(Calendar.YEAR);
+
 	}
 
 	public void insertLibro(Libro l) throws SQLException {
@@ -540,6 +544,12 @@ public class Database {
 		}
 		return null;
 
+	}
+
+	public void rimuoviLibroInPrestito(int idPrestito) throws SQLException {
+	PreparedStatement state = connessione.prepareStatement("delete from prestito where idPrestito = ?;");
+	state.setInt(1, idPrestito);
+	state.execute();
 	} 
 	
 
