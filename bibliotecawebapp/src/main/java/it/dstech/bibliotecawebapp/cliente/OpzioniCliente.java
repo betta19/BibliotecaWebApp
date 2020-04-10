@@ -25,33 +25,33 @@ public class OpzioniCliente extends HttpServlet {
 		Database db;
 		try {
 
-			//String username = req.getParameter("username");
+			// String username = req.getParameter("username");
 			String azione = req.getParameter("action");
 			HttpSession session = req.getSession();
 			String username = (String) session.getAttribute("username");
 			db = new Database();
 			if (azione.equalsIgnoreCase("Compra libri")) {
 				req.setAttribute("listaLibri", db.stampaListaLibri());
-				//req.setAttribute("username", username);
+				// req.setAttribute("username", username);
 				db.close();
 				req.getRequestDispatcher("/acquisto.jsp").forward(req, resp);
 			} else if (azione.equalsIgnoreCase("Affitta libri")) {
-				//req.setAttribute("username", username);
+				// req.setAttribute("username", username);
 				req.setAttribute("listaLibri", db.stampaListaLibri());
 				db.close();
 				req.getRequestDispatcher("/affitto.jsp").forward(req, resp);
 			} else if (azione.equalsIgnoreCase("Stampa acquisti")) {
-				//req.setAttribute("username", username);
+				// req.setAttribute("username", username);
 				req.setAttribute("listaScontrini", db.stampaScontrini(username));
 				db.close();
 				req.getRequestDispatcher("/stampaAcquisti.jsp").forward(req, resp);
 			} else if (azione.equalsIgnoreCase("Stampa prestiti")) {
-				//req.setAttribute("username", username);
+				// req.setAttribute("username", username);
 				req.setAttribute("listaPrestiti", db.stampaPrestiti(username));
 				db.close();
 				req.getRequestDispatcher("/stampaAffitti.jsp").forward(req, resp);
 			} else if (azione.equalsIgnoreCase("Dettagli")) {
-				//req.setAttribute("username", username);
+				// req.setAttribute("username", username);
 				int idScontrino = Integer.parseInt(req.getParameter("id"));
 				req.setAttribute("id", idScontrino);
 				req.setAttribute("listaScontrini", db.stampaScontrini(username));
@@ -59,14 +59,27 @@ public class OpzioniCliente extends HttpServlet {
 				db.close();
 				req.getRequestDispatcher("/listaProdottiDelloScontrino.jsp").forward(req, resp);
 			} else if (azione.equalsIgnoreCase("Info")) {
-				//req.setAttribute("username", username);
+				// req.setAttribute("username", username);
 				int idTessera = Integer.parseInt(req.getParameter("id"));
 				req.setAttribute("id", idTessera);
 				req.setAttribute("listaPrestiti", db.stampaPrestiti(username));
 				req.setAttribute("listaLibriTessera", db.stampaLibriInPrestito(idTessera));
 				db.close();
 				req.getRequestDispatcher("/listaLibriTessera.jsp").forward(req, resp);
-			} else if (azione.equalsIgnoreCase("Visualizza profilo")) {
+			} else if (azione.equalsIgnoreCase("Restituisci")) {
+				// req.setAttribute("username", username);
+				String titolo = req.getParameter("titolo");
+				int quantita = Integer.parseInt("disp");
+				//req.setAttribute("id", idTessera);
+				//update tabella libro
+				
+				//remove prestito da cliente
+				
+				db.close();
+				req.getRequestDispatcher("/stampaAffitti.jsp").forward(req, resp);
+			}
+
+			else if (azione.equalsIgnoreCase("Visualizza profilo")) {
 				session.setAttribute("utenteImmagine", db.prendiImmagine(username));
 				db.close();
 				req.getRequestDispatcher("/profilo.jsp").forward(req, resp);

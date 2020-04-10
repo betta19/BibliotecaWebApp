@@ -73,7 +73,7 @@ table, th, td {
 		<%=session.getAttribute("username")%>
 		?
 	</h2>
-	<form action="cliente/acquisto" method="post">
+	<form action="acquisto" method="post">
 		<div class="input-group input-group-sm mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="inputGroup-sizing-sm"><label
@@ -117,7 +117,7 @@ table, th, td {
 	<%
 		}
 	%>
-	<form action="acquisto" method="post">
+	<form action="/acquisto" method="post">
 		<input type="submit" class="btn btn-outline-secondary" name="azione"
 			value="Torna Indietro"> 
 		<%

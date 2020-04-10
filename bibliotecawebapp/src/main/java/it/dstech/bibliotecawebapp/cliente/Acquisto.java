@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import it.dstech.bibliotecawebapp.connessione.Database;
 
-@WebServlet (name = "acquisto", urlPatterns = { "/cliente/acquisto" })
+@WebServlet (name = "acquisto", urlPatterns = { "/acquisto" })
 public class Acquisto extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

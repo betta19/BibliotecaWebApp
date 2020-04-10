@@ -43,6 +43,16 @@
          <td>
     <%=l.getDataAffitto()%>
        </td> 
+        <td>
+    <%=l.getDataFine()%>
+    </td>    
+       
+        <form action="opzioniCliente" method="post">
+  <input type="submit" name="action" value="Restituisci"> 
+  <input type="text" hidden="true" id="titolo" name="titolo" value=<%=l.getTitolo()%>>
+  <input type="number" hidden="true" id="disp" name="disp" value=<%=l.getQuantita()%>>
+	</form>  
+	</td>   
     
   </tr>
 <% } %> 

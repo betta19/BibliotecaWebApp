@@ -41,7 +41,7 @@
     <%=s.getPrezzoTotale()%>
     </td> 
     <td>
-    <form action="cliente/opzioniCliente" method="post">
+    <form action="opzioniCliente" method="post">
   <input type="submit" name="action" value="Dettagli">
   <input type="number" hidden="true" id="id" name="id" value=<%=s.getIdScontrino()%>>
 	</form>  
@@ -50,7 +50,7 @@
   <% } %> 
 	
 </table> <br><br>
-<form action="cliente/tornaIndietro" method="post">
+<form action="tornaIndietro" method="post">
   <input type="submit" class="btn btn-outline-secondary" value="Torna Indietro">
 
   

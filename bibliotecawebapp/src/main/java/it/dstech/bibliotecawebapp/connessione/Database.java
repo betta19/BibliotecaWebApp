@@ -307,6 +307,11 @@ public class Database {
 
 		}
 	}
+	
+	//update libro dopo restituzione
+	public void updateTabellaLibroDopoRestituzione(String titolo, int disponibilita) throws SQLException {
+		
+	}
 
 	public void updateTabellaLibroSuDisp(String titolo, int disponibilita) throws SQLException {
 		PreparedStatement state = connessione.prepareStatement("update libro set  disponibilita=? where titolo = ?;");
