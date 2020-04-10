@@ -1,3 +1,4 @@
+<%@page import="it.dstech.bibliotecawebapp.modelli.Utente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -13,8 +14,8 @@
 
 <br>
 <%-- <%session.getAttribute("username"); %> --%>
-
-<h2><p class="text-xl-center">Fai una scelta, <%=session.getAttribute("username")%></p></h2><br><br>
+<%Utente utente = (Utente)session.getAttribute("utente");%>
+<h2><p class="text-xl-center">Fai una scelta, <%= utente.getUsername() %></p></h2><br><br>
 
 <% String mess = (String) request.getAttribute("mess"); 
 	if (mess != null ){
@@ -28,7 +29,7 @@
 
 %><br>
 
-<form action="opzioniCliente" method="post">
+<form action="cliente/opzioniCliente" method="post">
 <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Visualizza profilo">
   <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Compra libri">
  <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Affitta libri">

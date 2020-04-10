@@ -16,11 +16,11 @@ public class Home extends HttpServlet {
 
 		String scegli = req.getParameter("scegli");
 
-		if (scegli.equalsIgnoreCase("Registrati")) {
-
+		if (scegli == null) {
+			req.getRequestDispatcher("login.jsp").forward(req, resp);
+		} else if (scegli.equalsIgnoreCase("Registrati")) {
 			req.getRequestDispatcher("registrazione.jsp").forward(req, resp);
 		} else if (scegli.equalsIgnoreCase("Login")) {
-
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		}
 	}
