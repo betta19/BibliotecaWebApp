@@ -17,7 +17,7 @@ public class TornaIndietro extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		session.getAttribute("username");
-		req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
+		resp.sendRedirect("/paginaCliente.jsp");
 		
 	}
 	

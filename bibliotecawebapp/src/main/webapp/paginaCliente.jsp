@@ -28,8 +28,8 @@
 
 
 %><br>
-
-<form action="cliente/opzioniCliente" method="post">
+<% String path = request.getContextPath(); %>
+<form action="<%=path%>/cliente/opzioniCliente" method="post">
 <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Visualizza profilo">
   <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Compra libri">
  <br> <input type="submit"class="btn btn-outline-primary btn-block" style="width:150px; height:45px;margin:auto" name= action value="Affitta libri">

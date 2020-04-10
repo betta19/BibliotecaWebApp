@@ -22,8 +22,9 @@
    <th>Username </th>
    <th>Titolo</th>
    <th>Quantità </th>
-   <th>Data </th>
-    
+   <th>Data Affitto</th>
+     <th>Data Fine Affitto</th>
+     
   </tr>
   <% for(LibroInPrestito l : lista) { %>
   
@@ -46,11 +47,12 @@
         <td>
     <%=l.getDataFine()%>
     </td>    
+      <td>
        
         <form action="opzioniCliente" method="post">
   <input type="submit" name="action" value="Restituisci"> 
-  <input type="text" hidden="true" id="titolo" name="titolo" value=<%=l.getTitolo()%>>
-  <input type="number" hidden="true" id="disp" name="disp" value=<%=l.getQuantita()%>>
+  <input type="hidden" id="titolo" name="titolo" value=<%=l.getTitolo()%>>
+  <input type="hidden" id="disp" name="disp" value=<%=l.getQuantita()%>>
 	</form>  
 	</td>   
     

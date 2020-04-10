@@ -116,7 +116,7 @@ public class Affitto extends HttpServlet{
 							req.setAttribute("idTessera", idNuovo);
 						//	req.setAttribute("username", username);
 							req.setAttribute("listaLibri", db.stampaListaLibri());
-							req.setAttribute("mess", "Libro aggiunto con successo e pagamento effettuato");
+							req.setAttribute("mess", "Libro aggiunto con successo");
 							db.close();
 							req.getRequestDispatcher("/paginaCliente.jsp").forward(req, resp);
 						} else {

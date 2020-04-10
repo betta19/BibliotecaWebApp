@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -284,14 +286,15 @@ public class Database {
 	public void inserimentoTabellaAffitto(String titolo, String username, int idTessera, int quantita)
 			throws SQLException {
 		PreparedStatement state = connessione.prepareStatement(
-				"insert into prestito (titolo, username, idTessera, quantita, dataAffitto) values (?, ?, ?, ?, ?);");
-		java.util.Date data = new java.util.Date();
+				"insert into prestito (titolo, username, idTessera, quantita, dataAffitto, dataDiFine) values (?, ?, ?, ?, ?, ?);");
+		Date data = new Date();
 		DateFormat formato = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
 		state.setString(1, titolo);
 		state.setString(2, username);
 		state.setInt(3, idTessera);
 		state.setInt(4, quantita);
 		state.setString(5, formato.format(data));
+		state.setString(6, calcoloData(formato.format(data)) );
 		state.execute();
 	}
 
@@ -310,7 +313,16 @@ public class Database {
 	
 	//update libro dopo restituzione
 	public void updateTabellaLibroDopoRestituzione(String titolo, int disponibilita) throws SQLException {
-		
+		List<Libro> lista = stampaListaLibri();
+		for (int i = 0; i < lista.size(); i++) {
+			if (lista.get(i).getTitolo().equalsIgnoreCase(titolo)) {
+				int nuovaDisponibilita = lista.get(i).getDisponibilita() + disponibilita;
+
+				lista.get(i).setDisponibilita(nuovaDisponibilita);
+				updateTabellaLibroSuDisp(titolo, nuovaDisponibilita);
+			}
+
+		}
 	}
 
 	public void updateTabellaLibroSuDisp(String titolo, int disponibilita) throws SQLException {
@@ -363,6 +375,19 @@ public class Database {
 
 		return elenco;
 
+	}
+	public String calcoloData(String dataInizio) {
+        String[] d = dataInizio.split("/");
+        System.out.println(d[0] + " , " + d[1] + " , " + d[2]);
+        Calendar data1 = Calendar.getInstance();
+
+        data1.set(Calendar.DATE, Integer.parseInt(d[0]));
+        data1.set(Calendar.MONTH, Integer.parseInt(d[1]));
+        data1.set(Calendar.YEAR, Integer.parseInt(d[2]));
+
+        data1.add(Calendar.DATE, 30);
+
+        return data1.get(Calendar.DATE) + "/" + data1.get(Calendar.MONTH) + "/" + data1.get(Calendar.YEAR);
 	}
 
 	public void insertLibro(Libro l) throws SQLException {
@@ -515,6 +540,7 @@ public class Database {
 		}
 		return null;
 
-	}
+	} 
+	
 
 }

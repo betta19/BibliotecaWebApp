@@ -117,7 +117,8 @@ table, th, td {
 	<%
 		}
 	%>
-	<form action="/acquisto" method="post">
+
+	<form action="cliente/acquisto" method="post">
 		<input type="submit" class="btn btn-outline-secondary" name="azione"
 			value="Torna Indietro"> 
 		<%

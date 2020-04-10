@@ -15,7 +15,7 @@ import javax.servlet.http.Part;
 import it.dstech.bibliotecawebapp.connessione.Database;
 import it.dstech.bibliotecawebapp.modelli.Utente;
 
-@WebServlet(urlPatterns = { "/cliente/opzioniCliente" })
+@WebServlet(urlPatterns = { "/cliente/opzioniCliente", "/opzioniCliente" })
 @MultipartConfig
 public class OpzioniCliente extends HttpServlet {
 
@@ -67,14 +67,14 @@ public class OpzioniCliente extends HttpServlet {
 				db.close();
 				req.getRequestDispatcher("/listaLibriTessera.jsp").forward(req, resp);
 			} else if (azione.equalsIgnoreCase("Restituisci")) {
-				// req.setAttribute("username", username);
 				String titolo = req.getParameter("titolo");
-				int quantita = Integer.parseInt("disp");
-				//req.setAttribute("id", idTessera);
+				int quantita = Integer.parseInt(req.getParameter("disp"));
 				//update tabella libro
-				
+				db.updateTabellaLibroDopoRestituzione(titolo, quantita);
 				//remove prestito da cliente
-				
+				req.setAttribute("titolo", titolo);
+				req.setAttribute("disp", quantita);
+				req.setAttribute("listaPrestiti", db.stampaPrestiti(username));
 				db.close();
 				req.getRequestDispatcher("/stampaAffitti.jsp").forward(req, resp);
 			}
