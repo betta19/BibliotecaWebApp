@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
 				
 				
 				
-				if (utente != null) {
+				if (utente != null && utente.getTipo().contains("cliente")) {
 
 					
 					if (!utente.isActive()) {
@@ -53,6 +53,8 @@ public class Login extends HttpServlet {
 					}
 					
 					else {
+						
+					session.setAttribute("tipo", utente.getTipo());
 					session.setAttribute("utente", utente);
 					session.setAttribute("username", username);
 					db.close();
@@ -60,11 +62,10 @@ public class Login extends HttpServlet {
 					req.getRequestDispatcher("paginaCliente.jsp").forward(req, resp);
 				}
 				}
-				else if (username.equals(getInitParameter("username"))
-						&& password.equals(getInitParameter("password"))) {
+				else if (utente.getTipo().equalsIgnoreCase("admin")) {
 
-					session.setAttribute("username", username);
-					session.setAttribute("password", password);
+					session.setAttribute("tipo", utente.getTipo());
+					
 					db.close();
 					req.getRequestDispatcher("paginaAmministratore.jsp").forward(req, resp);
 				}

@@ -26,13 +26,13 @@ public class FiltroCliente implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		String loginURI = req.getContextPath() + "/login.jsp";
+		String loginURI = req.getContextPath() + "/";
 		
 		try {
 		HttpSession session = (HttpSession) req.getSession();
 		
 
-		boolean loggedIn = session != null && session.getAttribute("utente") != null;
+		boolean loggedIn = session != null && session.getAttribute("utente") != null && session.getAttribute("tipo").equals("cliente");
 		boolean loginRequest = req.getRequestURI().equals(loginURI);
 
 		if (loggedIn || loginRequest) {

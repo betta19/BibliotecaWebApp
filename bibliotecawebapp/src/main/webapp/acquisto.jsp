@@ -19,7 +19,7 @@ table, th, td {
 <title>Insert title here</title>
 </head>
 <body>
-<%-- 	<%  
+<%-- 	<%  \
 	String nome = (String) request.getAttribute("username");
 	%> --%>
 	<%
@@ -118,7 +118,7 @@ table, th, td {
 		}
 	%>
 
-	<form action="cliente/acquisto" method="post">
+	<form action="acquisto" method="post">
 		<input type="submit" class="btn btn-outline-secondary" name="azione"
 			value="Torna Indietro"> 
 		<%

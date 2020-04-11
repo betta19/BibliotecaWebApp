@@ -507,6 +507,7 @@ public class Database {
 			String p = executeQuery.getString("password");
 			boolean ac = executeQuery.getBoolean("active");
 			Blob blob = executeQuery.getBlob("immagine");
+			String tipo = executeQuery.getString("tipo");
 			InputStream inputStream = blob.getBinaryStream();
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			byte[] buffer = new byte[4096];
@@ -517,7 +518,7 @@ public class Database {
 			byte[] imageBytes = outputStream.toByteArray();
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes);
 
-			return new Utente(u, p, ac, base64Image);
+			return new Utente(u, p, ac, base64Image, tipo);
 
 		}
 		return null;

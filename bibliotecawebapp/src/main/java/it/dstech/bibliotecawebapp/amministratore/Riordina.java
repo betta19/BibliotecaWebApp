@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.dstech.bibliotecawebapp.connessione.Database;
 
-
-
-@WebServlet(name = "riordina", urlPatterns = "/riordina")
+@WebServlet(name = "riordina", urlPatterns = "/admin/riordina")
 public class Riordina extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,20 +20,26 @@ public class Riordina extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String titolo = req.getParameter("titolo");
-		int quantita = Integer.parseInt(req.getParameter("quantita"));
-		try {
-			Database db = new Database();
-			int quantitaVecchia = db.checkQuantita(titolo);
-			int disponibiltaVecchia = db.checkDisponibilita(titolo);
-			db.updateLibri(titolo, quantita, quantitaVecchia, disponibiltaVecchia);
-			req.setAttribute("listaLibri", db.stampaListaLibri());
-			req.setAttribute("messaggio", "quantità e disponibilità aggiornate");
-			db.close();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
+		String azione = req.getParameter("azione");
+		if ("riordina".equalsIgnoreCase(azione)) {
 
-		req.getRequestDispatcher("riordina.jsp").forward(req, resp);
+			String titolo = req.getParameter("titolo");
+			int quantita = Integer.parseInt(req.getParameter("quantita"));
+			try {
+				Database db = new Database();
+				int quantitaVecchia = db.checkQuantita(titolo);
+				int disponibiltaVecchia = db.checkDisponibilita(titolo);
+				db.updateLibri(titolo, quantita, quantitaVecchia, disponibiltaVecchia);
+				req.setAttribute("listaLibri", db.stampaListaLibri());
+				req.setAttribute("messaggio", "quantità e disponibilità aggiornate");
+				db.close();
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+
+			req.getRequestDispatcher("/riordina.jsp").forward(req, resp);
+		} else if ("Torna Indietro".equalsIgnoreCase(azione)) {
+			req.getRequestDispatcher("/paginaAmministratore.jsp").forward(req, resp);
+		}
 	}
 }

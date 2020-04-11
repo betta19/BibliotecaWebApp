@@ -6,7 +6,7 @@ public class Utente {
 	private String password;
 	private boolean active;
 	private String image;
-	
+	private String tipo;
 	
 
 	
@@ -16,6 +16,35 @@ public class Utente {
 		this.password = password;
 		this.active = active;
 		this.image = image;
+	}
+
+
+
+
+
+	public Utente(String username, String password, boolean active, String image, String tipo) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.active = active;
+		this.image = image;
+		this.tipo = tipo;
+	}
+
+
+
+
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 

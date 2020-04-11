@@ -91,9 +91,9 @@
 						style="height: 45px;" name="azione" value="Riordina"> <br>
 					<br>
 				</form>
-				<form action="paginaAmministratore.jsp">
+				<form action="riordina">
 					<input type="submit" class="btn btn-outline-secondary"
-						style="width: 120px; height: 45px;" value="Torna Indietro">
+						style="width: 120px; height: 45px;" name="azione" value="Torna Indietro">
 
 				</form>
 			</div>

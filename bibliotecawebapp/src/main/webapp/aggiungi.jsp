@@ -90,12 +90,12 @@
 						<br>
 					</div>
 					<input type="submit" class="btn btn-outline-success"
-						style="width: 120px; height: 45px;" value="Aggiungi">
+						style="width: 120px; height: 45px;" name= "action" value="Aggiungi">
 				</form>
 				<br>
 				<br>
-				<form action="paginaAmministratore.jsp">
-					<input type="submit" class="btn btn-outline-secondary"
+				<form action="aggiungi">
+					<input type="submit" class="btn btn-outline-secondary" name= "action"
 						value="Torna Indietro">
 				</form>
 			</div>
