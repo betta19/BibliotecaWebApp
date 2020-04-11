@@ -91,7 +91,7 @@
 						style="height: 45px;" name="azione" value="Riordina"> <br>
 					<br>
 				</form>
-				<form action="riordina">
+				<form action="indietro" method="post">
 					<input type="submit" class="btn btn-outline-secondary"
 						style="width: 120px; height: 45px;" name="azione" value="Torna Indietro">
 

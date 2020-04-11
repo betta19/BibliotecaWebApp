@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import it.dstech.bibliotecawebapp.connessione.Database;
 import it.dstech.bibliotecawebapp.modelli.Libro;
 
-@WebServlet(name = "aggiungi", urlPatterns = "/aggiungi")
+@WebServlet(name = "aggiungi", urlPatterns = "/admin/aggiungi")
 public class AggiungiLibro extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,8 +21,8 @@ public class AggiungiLibro extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String azione = req.getParameter("action");
-		if ("aggiungi".equalsIgnoreCase(azione)) {
+	
+	
 
 			String titolo = req.getParameter("titolo");
 			String autore = req.getParameter("autore");
@@ -38,8 +38,6 @@ public class AggiungiLibro extends HttpServlet {
 				e.printStackTrace();
 			}
 			req.getRequestDispatcher("/lista_libri.jsp").forward(req, resp);
-		} else if ("Torna Indietro".equalsIgnoreCase(azione)) {
-			req.getRequestDispatcher("/paginaAmministratore.jsp").forward(req, resp);
-		}
+		
 	}
 }

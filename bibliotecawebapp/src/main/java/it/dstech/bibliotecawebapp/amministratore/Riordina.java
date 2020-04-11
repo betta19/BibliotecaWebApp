@@ -20,8 +20,7 @@ public class Riordina extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String azione = req.getParameter("azione");
-		if ("riordina".equalsIgnoreCase(azione)) {
+		
 
 			String titolo = req.getParameter("titolo");
 			int quantita = Integer.parseInt(req.getParameter("quantita"));
@@ -38,8 +37,5 @@ public class Riordina extends HttpServlet {
 			}
 
 			req.getRequestDispatcher("/riordina.jsp").forward(req, resp);
-		} else if ("Torna Indietro".equalsIgnoreCase(azione)) {
-			req.getRequestDispatcher("/paginaAmministratore.jsp").forward(req, resp);
-		}
-	}
+		} 
 }

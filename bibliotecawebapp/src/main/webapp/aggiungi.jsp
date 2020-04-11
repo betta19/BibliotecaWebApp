@@ -94,8 +94,8 @@
 				</form>
 				<br>
 				<br>
-				<form action="aggiungi">
-					<input type="submit" class="btn btn-outline-secondary" name= "action"
+				<form action="indietro" method="post">
+					<input type="submit" class="btn btn-outline-secondary" 
 						value="Torna Indietro">
 				</form>
 			</div>
