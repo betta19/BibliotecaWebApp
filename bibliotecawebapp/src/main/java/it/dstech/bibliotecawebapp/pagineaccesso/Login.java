@@ -18,8 +18,7 @@ import it.dstech.bibliotecawebapp.emailutility.Mail;
 import it.dstech.bibliotecawebapp.modelli.Utente;
 
 
-@WebServlet(name = "login", urlPatterns = { "/login" }, initParams = {
-		@WebInitParam(name = "username", value = "admin"), @WebInitParam(name = "password", value = "1234") })
+@WebServlet(name = "login", urlPatterns = { "/login" })
 
 public class Login extends HttpServlet {
 
@@ -41,7 +40,7 @@ public class Login extends HttpServlet {
 				
 				
 				
-				if (utente != null && utente.getTipo().contains("cliente")) {
+				if (utente != null && utente.getTipo().equalsIgnoreCase("cliente")) {
 
 					
 					if (!utente.isActive()) {
